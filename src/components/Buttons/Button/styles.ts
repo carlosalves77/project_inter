@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import {THEME} from '../../theme';
+import {THEME} from '../../../theme';
 
 import {RFValue} from 'react-native-responsive-fontsize';
 
@@ -15,7 +15,7 @@ export const Container = styled.TouchableOpacity`
 `;
 
 export const Title = styled.Text`
-  font-family: ${THEME.fonts.body};
+  font-family: ${THEME.fonts.bold};
   font-size: ${RFValue(16)}px;
   color: ${THEME.colors.white};
 `;

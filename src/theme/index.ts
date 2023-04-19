@@ -8,7 +8,11 @@ export const THEME = {
     gray: '#8F8F8F',
   },
   fonts: {
-    heading: 'Nunito_Medium',
-    body: 'Nunito_Regular',
+    medium: 'Nunito-Medium',
+    regular: 'Nunito-Regular',
+    bold: 'Nunito-Bold',
+    extraBold: 'Nunito-ExtraBold',
+    interMedium: ' Inter-Medium',
+    interRegular: ' Inter-Regular',
   },
 };

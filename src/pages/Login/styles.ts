@@ -4,6 +4,10 @@ import {Platform} from 'react-native';
 import {THEME} from '../../theme';
 
 import {RFValue} from 'react-native-responsive-fontsize';
+import {Dimensions} from 'react-native';
+
+const windowHeight = Dimensions.get('window').height;
+const textPostion = windowHeight * 0.55;
 
 export const Container = styled.SafeAreaView`
   flex: 1;
@@ -37,8 +41,7 @@ export const LogoImage = styled.Image`
 `;
 
 export const Title = styled.Text`
-  font-family: ${THEME.fonts.body};
-  font-style: normal;
+  font-family: ${THEME.fonts.extraBold};
   font-weight: 800;
   font-size: ${RFValue(36)}px;
   line-height: 49px;
@@ -54,7 +57,16 @@ export const UserTextInput = styled.TextInput`
   padding: 0 16px;
   margin-top: 10px;
   margin-bottom: 8px;
-  font-size: 14px;
+
+  font-family: ${THEME.fonts.extraBold};
+  font-weight: 800;
+  font-size: ${RFValue(20)}px;
+  text-decoration-line: none;
+`;
+
+export const PasswordContent = styled.View`
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const ForgetPasswordContent = styled.View`
@@ -66,7 +78,7 @@ export const ForgetPasswordContent = styled.View`
 export const ForgetPasswordButton = styled.TouchableOpacity``;
 
 export const ForgetPasswordText = styled.Text`
-  font-family: ${THEME.fonts.body};
+  font-family: ${THEME.fonts.bold};
   font-style: normal;
   font-weight: 800;
   font-size: ${RFValue(16)}px;
@@ -75,10 +87,10 @@ export const ForgetPasswordText = styled.Text`
 `;
 
 export const NoAccountText = styled.Text`
-  font-family: 'Nunito';
+  font-family: ${THEME.fonts.bold};
   font-style: normal;
   font-weight: 800;
-  font-size: 20px;
+  font-size: ${RFValue(20)}px;
   text-align: center;
   color: ${THEME.colors.black};
   margin-top: 30px;
@@ -87,10 +99,55 @@ export const NoAccountText = styled.Text`
 export const CreateAccountButton = styled.TouchableOpacity``;
 
 export const CreateAccountText = styled.Text`
-  font-family: 'Nunito';
+  font-family: ${THEME.fonts.bold};
   font-style: normal;
   font-weight: 800;
-  font-size: 20px;
+  font-size: ${RFValue(20)}px;
   text-align: center;
   color: ${THEME.colors.red};
+`;
+
+export const ShowAndHidePasswordButton = styled.TouchableOpacity`
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  top: 0;
+  justify-content: center;
+  margin-right: 20px;
+`;
+
+export const Modal = styled.View`
+  flex: 1;
+  background-color: ${THEME.colors.background};
+  align-items: center;
+`;
+
+export const ModalImage = styled.Image`
+  width: 100%;
+  height: ${windowHeight * 0.85}px;
+  border-bottom-left-radius: 58px;
+  border-bottom-right-radius: 58px;
+`;
+
+export const TextInfoView = styled.View`
+  position: absolute;
+  top: ${textPostion}px;
+  left: 24px;
+`;
+
+export const TextInfo = styled.Text`
+  font-family: ${THEME.fonts.regular};
+  font-style: normal;
+  font-weight: 800;
+  font-size: ${RFValue(35)}px;
+  color: ${THEME.colors.white};
+`;
+
+export const TextInfoDescription = styled.Text`
+  font-family: ${THEME.fonts.medium};
+  font-style: normal;
+  font-weight: 300;
+  font-size: ${RFValue(24)}px;
+  color: ${THEME.colors.white};
 `;
