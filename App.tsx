@@ -1,8 +1,14 @@
-import {Home} from './src/pages/Home';
-import {Login} from './src/pages/Login';
+import React from 'react';
+import {StackRoutes} from './src/routes';
 
-const App = () => {
-  return <Login />;
+import {NavigationContainer} from '@react-navigation/native';
+
+const App: React.FC = () => {
+  return (
+    <NavigationContainer>
+      <StackRoutes />
+    </NavigationContainer>
+  );
 };
 
 export default App;

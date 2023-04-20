@@ -6,6 +6,7 @@ export const THEME = {
     black: '#010100',
     red: '#F04444',
     gray: '#8F8F8F',
+    lightGray: 'rgba(0, 0, 0, 0.71)',
   },
   fonts: {
     medium: 'Nunito-Medium',

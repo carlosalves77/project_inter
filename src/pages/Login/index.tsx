@@ -7,7 +7,7 @@ import {
   ToastAndroid,
   View,
   Animated,
-  TouchableWithoutFeedback,
+  Dimensions,
 } from 'react-native';
 
 import {
@@ -33,6 +33,9 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 
+import {useNavigation} from '@react-navigation/native';
+import {AppNavigationProps} from '../../routes/index';
+
 import {Button} from '../../components/Buttons/Button';
 import {ButtonModal} from '../../components/Buttons/ButtonModal';
 
@@ -41,18 +44,25 @@ import welcomeFoodModal from '../../../assets/welcome-food.png';
 
 import Icon from 'react-native-vector-icons/Feather';
 
-const Login: React.FC = ({}) => {
+const deviceHeight = Dimensions.get('window').height;
+
+const Login: React.FC = () => {
   const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(true);
+
   const [modalLogin, setModalLogin] = React.useState(true);
 
   const [animation] = useState(new Animated.Value(0));
+  const [animationOut] = React.useState(new Animated.Value(-deviceHeight));
+
+  const navigation = useNavigation<AppNavigationProps>();
 
   useEffect(() => {
     Animated.timing(animation, {
       toValue: 1,
-      duration: 1000,
+      duration: 500,
       useNativeDriver: true,
     }).start();
   }, []);
@@ -62,15 +72,27 @@ const Login: React.FC = ({}) => {
       {
         translateY: animation.interpolate({
           inputRange: [0, 1],
-          outputRange: [400, -0],
+          outputRange: [500, 0],
         }),
       },
     ],
   };
 
+  const closeModal = () => {
+    Animated.timing(animation, {
+      toValue: -deviceHeight,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+    setModalLogin(false);
+  };
+
   const handleLogin = async (user: string, password: string) => {
     try {
       if (user === 'carlos' && password === '123456') {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1000);
         ToastAndroid.showWithGravity(
           'Login realizado com sucesso',
           ToastAndroid.SHORT,
@@ -82,41 +104,89 @@ const Login: React.FC = ({}) => {
           ToastAndroid.SHORT,
           ToastAndroid.TOP,
         );
+        setIsLoading(true);
       }
     } catch {
       console.log('Erro ao fazer login');
+    } finally {
+      setIsLoading(true);
     }
+  };
+
+  const handleSignUp = () => {
+    navigation.navigate('SignUp');
   };
 
   return (
     <View>
       {modalLogin ? (
-        <Animated.View style={[animatedStyle]}>
-          <Modal>
-            <StatusBar hidden />
-            <ModalImage source={welcomeFoodModal} />
-            <ButtonModal onPress={() => setModalLogin(false)} />
-            <TextInfoView>
-              <TextInfo>Bem Vindo</TextInfo>
-              <TextInfoDescription>
-                Doe com amor e ofereça{'\n'}um prato cheio de{'\n'}esperança!
-              </TextInfoDescription>
-            </TextInfoView>
-            <LinearGradient
-              style={{
-                position: 'absolute',
-                left: 0,
-                right: 0,
-                bottom: 0,
-                height: '50%',
-                borderRadius: 14,
-                zIndex: 1,
-                backgroundColor: 'transparent',
-              }}
-              colors={['transparent', 'rgba(0,0,0,0.70)', 'rgba(0,0,0,0.90)']}
-            />
-          </Modal>
-        </Animated.View>
+        <View>
+          {modalLogin ? (
+            <Animated.View style={[animatedStyle]}>
+              <Modal>
+                <StatusBar hidden />
+                <ModalImage source={welcomeFoodModal} />
+                <ButtonModal onPress={() => closeModal()} />
+                <TextInfoView>
+                  <TextInfo>Bem Vindo</TextInfo>
+                  <TextInfoDescription>
+                    Doe com amor e ofereça{'\n'}um prato cheio de{'\n'}
+                    esperança!
+                  </TextInfoDescription>
+                </TextInfoView>
+                <LinearGradient
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    height: '50%',
+                    borderRadius: 14,
+                    zIndex: 1,
+                    backgroundColor: 'transparent',
+                  }}
+                  colors={[
+                    'transparent',
+                    'rgba(0,0,0,0.70)',
+                    'rgba(0,0,0,0.90)',
+                  ]}
+                />
+              </Modal>
+            </Animated.View>
+          ) : (
+            <Animated.View style={[{transform: [{translateY: animationOut}]}]}>
+              <Modal>
+                <StatusBar hidden />
+                <ModalImage source={welcomeFoodModal} />
+                <ButtonModal onPress={() => closeModal()} />
+                <TextInfoView>
+                  <TextInfo>Bem Vindo</TextInfo>
+                  <TextInfoDescription>
+                    Doe com amor e ofereça{'\n'}um prato cheio de{'\n'}
+                    esperança!
+                  </TextInfoDescription>
+                </TextInfoView>
+                <LinearGradient
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    height: '50%',
+                    borderRadius: 14,
+                    zIndex: 1,
+                    backgroundColor: 'transparent',
+                  }}
+                  colors={[
+                    'transparent',
+                    'rgba(0,0,0,0.70)',
+                    'rgba(0,0,0,0.90)',
+                  ]}
+                />
+              </Modal>
+            </Animated.View>
+          )}
+        </View>
       ) : (
         <ScrollView
           showsVerticalScrollIndicator={false}
@@ -137,8 +207,10 @@ const Login: React.FC = ({}) => {
               keyboardType="default"
               onChangeText={text => setUser(text.replace(/\s/g, ''))}
               maxLength={12}
+              editable={isLoading}
               autoCorrect={false}
               value={user}
+              underlineColorAndroid="transparent"
             />
             <PasswordContent>
               <UserTextInput
@@ -147,6 +219,7 @@ const Login: React.FC = ({}) => {
                 keyboardType="default"
                 onChangeText={text => setPassword(text.replace(/\s/g, ''))}
                 value={password}
+                editable={isLoading}
                 secureTextEntry={!showPassword}
                 maxLength={12}
                 autoCorrect={false}
@@ -169,73 +242,19 @@ const Login: React.FC = ({}) => {
                 <ForgetPasswordText>Recuperar senha</ForgetPasswordText>
               </ForgetPasswordButton>
             </ForgetPasswordContent>
-            <Button onPress={() => handleLogin(user, password)} />
+            <Button
+              name="Entrar"
+              onPress={() => handleLogin(user, password)}
+              isLoading={isLoading}
+            />
             <NoAccountText>Não pussui conta?</NoAccountText>
-            <CreateAccountButton
-              onPress={() => console.log('Create a account')}>
+            <CreateAccountButton onPress={() => handleSignUp()}>
               <CreateAccountText>Cadastre-se agora</CreateAccountText>
             </CreateAccountButton>
           </Container>
         </ScrollView>
       )}
     </View>
-    //     <ScrollView
-    //       showsVerticalScrollIndicator={false}
-    //       contentContainerStyle={{flexGrow: 1}}>
-    //       <KeyboardAvoidingView
-    //         behavior={
-    //           Platform.OS === 'ios' ? 'padding' : 'height'
-    //         }></KeyboardAvoidingView>
-    //       <Container>
-    //         <StatusBar hidden />
-
-    //         <LogoCard>
-    //           <LogoImage source={LoginLogo} />
-    //         </LogoCard>
-    //         <Title>Olá, novamente!</Title>
-    //         <UserTextInput
-    //           placeholder="Usuário"
-    //           keyboardType="default"
-    //           onChangeText={text => setUser(text.replace(/\s/g, ''))}
-    //           maxLength={12}
-    //           autoCorrect={false}
-    //           value={user}
-    //         />
-    //         <PasswordContent>
-    //           <UserTextInput
-    //             style={{}}
-    //             placeholder="Senha"
-    //             keyboardType="default"
-    //             onChangeText={text => setPassword(text.replace(/\s/g, ''))}
-    //             value={password}
-    //             secureTextEntry={!showPassword}
-    //             maxLength={12}
-    //             autoCorrect={false}
-    //           />
-
-    //           <ShowAndHidePasswordButton
-    //             onPress={() => {
-    //               setShowPassword(!showPassword);
-    //             }}>
-    //             {showPassword ? (
-    //               <Icon name="eye" size={28} />
-    //             ) : (
-    //               <Icon name="eye-off" size={28} />
-    //             )}
-    //           </ShowAndHidePasswordButton>
-    //         </PasswordContent>
-    //         <ForgetPasswordContent>
-    //           <ForgetPasswordButton onPress={() => console.log('Forget Password')}>
-    //             <ForgetPasswordText>Recuperar senha</ForgetPasswordText>
-    //           </ForgetPasswordButton>
-    //         </ForgetPasswordContent>
-    //         <Button onPress={() => handleLogin(user, password)} />
-    //         <NoAccountText>Não pussui conta?</NoAccountText>
-    //         <CreateAccountButton onPress={() => console.log('Create a account')}>
-    //           <CreateAccountText>Cadastre-se agora</CreateAccountText>
-    //         </CreateAccountButton>
-    //       </Container>
-    //     </ScrollView>
   );
 };
 

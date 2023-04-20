@@ -1,13 +1,22 @@
+import React from 'react';
 import {Container, Title} from './styles';
 
+import {ActivityIndicator} from 'react-native';
+
 interface ButtonProps {
-  onPress: () => void;
+  name: string;
+  onPress?: () => void;
+  isLoading?: boolean;
 }
 
-const Button = ({onPress}: ButtonProps) => {
+const Button: React.FC<ButtonProps> = ({onPress, name, isLoading}) => {
   return (
     <Container onPress={onPress}>
-      <Title>Entrar</Title>
+      {isLoading ? (
+        <Title>{name}</Title>
+      ) : (
+        <ActivityIndicator size="large" color="#fff" />
+      )}
     </Container>
   );
 };
