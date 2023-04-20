@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
   StatusBar,
   ScrollView,
@@ -9,6 +9,8 @@ import {
   Animated,
   Dimensions,
 } from 'react-native';
+
+import Toast from 'react-native-toast-message';
 
 import {
   Container,
@@ -45,59 +47,56 @@ import welcomeFoodModal from '../../../assets/welcome-food.png';
 import Icon from 'react-native-vector-icons/Feather';
 
 const deviceHeight = Dimensions.get('window').height;
+const deviceWidth = Dimensions.get('window').width;
 
 const Login: React.FC = () => {
   const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [showPassword, setShowPassword] = React.useState(true);
+  const [showPassword, setShowPassword] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
 
   const [modalLogin, setModalLogin] = React.useState(true);
 
-  const [animation] = useState(new Animated.Value(0));
-  const [animationOut] = React.useState(new Animated.Value(-deviceHeight));
+  const [modalY] = React.useState(new Animated.Value(-deviceHeight));
 
   const navigation = useNavigation<AppNavigationProps>();
 
-  useEffect(() => {
-    Animated.timing(animation, {
+  useEffect(() => {}, [
+    Animated.timing(modalY, {
       toValue: 1,
-      duration: 500,
+      duration: 0,
       useNativeDriver: true,
-    }).start();
-  }, []);
-
-  const animatedStyle = {
-    transform: [
-      {
-        translateY: animation.interpolate({
-          inputRange: [0, 1],
-          outputRange: [500, 0],
-        }),
-      },
-    ],
-  };
+    }).start(),
+  ]);
 
   const closeModal = () => {
-    Animated.timing(animation, {
-      toValue: -deviceHeight,
+    Animated.timing(modalY, {
       duration: 500,
+      toValue: -deviceHeight,
       useNativeDriver: true,
     }).start();
-    setModalLogin(false);
+    setTimeout(() => {
+      setModalLogin(false);
+    }, 500);
+  };
+
+  const handleToast = () => {
+    Toast.show({
+      type: 'success',
+      text1: 'Hello',
+      text2: 'Login efetuado com sucesso!',
+    });
+    console.log('Toast');
   };
 
   const handleLogin = async (user: string, password: string) => {
     try {
-      if (user === 'carlos' && password === '123456') {
+      if (user === 'carlos' && password === '123') {
         setTimeout(() => {
           setIsLoading(false);
         }, 1000);
-        ToastAndroid.showWithGravity(
-          'Login realizado com sucesso',
-          ToastAndroid.SHORT,
-          ToastAndroid.CENTER,
-        );
+        handleToast();
+        return navigation.navigate('Home');
       } else {
         ToastAndroid.showWithGravity(
           'Falha ao efetuar o login',
@@ -120,73 +119,24 @@ const Login: React.FC = () => {
   return (
     <View>
       {modalLogin ? (
-        <View>
-          {modalLogin ? (
-            <Animated.View style={[animatedStyle]}>
-              <Modal>
-                <StatusBar hidden />
-                <ModalImage source={welcomeFoodModal} />
-                <ButtonModal onPress={() => closeModal()} />
-                <TextInfoView>
-                  <TextInfo>Bem Vindo</TextInfo>
-                  <TextInfoDescription>
-                    Doe com amor e ofereça{'\n'}um prato cheio de{'\n'}
-                    esperança!
-                  </TextInfoDescription>
-                </TextInfoView>
-                <LinearGradient
-                  style={{
-                    position: 'absolute',
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    height: '50%',
-                    borderRadius: 14,
-                    zIndex: 1,
-                    backgroundColor: 'transparent',
-                  }}
-                  colors={[
-                    'transparent',
-                    'rgba(0,0,0,0.70)',
-                    'rgba(0,0,0,0.90)',
-                  ]}
-                />
-              </Modal>
-            </Animated.View>
-          ) : (
-            <Animated.View style={[{transform: [{translateY: animationOut}]}]}>
-              <Modal>
-                <StatusBar hidden />
-                <ModalImage source={welcomeFoodModal} />
-                <ButtonModal onPress={() => closeModal()} />
-                <TextInfoView>
-                  <TextInfo>Bem Vindo</TextInfo>
-                  <TextInfoDescription>
-                    Doe com amor e ofereça{'\n'}um prato cheio de{'\n'}
-                    esperança!
-                  </TextInfoDescription>
-                </TextInfoView>
-                <LinearGradient
-                  style={{
-                    position: 'absolute',
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    height: '50%',
-                    borderRadius: 14,
-                    zIndex: 1,
-                    backgroundColor: 'transparent',
-                  }}
-                  colors={[
-                    'transparent',
-                    'rgba(0,0,0,0.70)',
-                    'rgba(0,0,0,0.90)',
-                  ]}
-                />
-              </Modal>
-            </Animated.View>
-          )}
-        </View>
+        <Animated.View
+          style={[
+            {width: deviceWidth, height: deviceHeight},
+            {transform: [{translateY: modalY}]},
+          ]}>
+          <Modal>
+            <StatusBar hidden />
+            <ModalImage source={welcomeFoodModal} />
+            <ButtonModal onPress={() => closeModal()} />
+            <TextInfoView>
+              <TextInfo>Bem Vindo</TextInfo>
+              <TextInfoDescription>
+                Doe com amor e ofereça{'\n'}um prato cheio de{'\n'}
+                esperança!
+              </TextInfoDescription>
+            </TextInfoView>
+          </Modal>
+        </Animated.View>
       ) : (
         <ScrollView
           showsVerticalScrollIndicator={false}
@@ -198,6 +148,7 @@ const Login: React.FC = () => {
           <Container>
             <StatusBar hidden />
 
+            <Toast position="top" />
             <LogoCard>
               <LogoImage source={LoginLogo} />
             </LogoCard>

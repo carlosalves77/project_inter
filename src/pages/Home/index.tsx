@@ -1,11 +1,58 @@
-import {Text} from 'react-native';
+import React from 'react';
 
-import * as S from './styles';
+import {
+  Container,
+  Title,
+  LogoutButton,
+  Name,
+  TopViewStyle,
+  Content,
+  BottomViewStyle,
+  TextAndShoppingCart,
+  TextContent,
+  CardOptions,
+  Card,
+  CardImage,
+} from './styles';
 
-export function Home() {
+import Icon from 'react-native-vector-icons/Feather';
+
+import {ShoppingCart} from '../../components/ShoppingCart';
+import {MapLocation} from '../../components/MapLocation';
+
+import OutStock from '../../../assets/OutStock.svg';
+import Revenue from '../../../assets/Revenue.svg';
+import voluntary from '../../../assets/Voluntary.svg';
+
+const Home: React.FC = () => {
+  const handleLogout = () => {
+    console.log('Logout');
+  };
+
   return (
-    <S.Container>
-      <Text>Welcome to React Native!</Text>
-    </S.Container>
+    <Container>
+      <TopViewStyle />
+      <Content>
+        <LogoutButton onPress={() => handleLogout()}>
+          <Icon name="log-out" size={24} color="#fff" />
+        </LogoutButton>
+        <TextAndShoppingCart>
+          <TextContent>
+            <Title>Seja bem-vindo,</Title>
+            <Name>Gabriel Monteiro</Name>
+          </TextContent>
+          <ShoppingCart />
+        </TextAndShoppingCart>
+        {/* <MapLocation /> */}
+        <CardOptions>
+          <Card>
+            <CardImage source={OutStock} />
+          </Card>
+        </CardOptions>
+      </Content>
+      <BottomViewStyle />
+    </Container>
   );
-}
+};
+
+export {Home};

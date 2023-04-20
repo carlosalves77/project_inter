@@ -108,7 +108,7 @@ const SignUp: React.FC = () => {
                 );
               }
             })}
-        <Button name="Cadastrar" handleLoading={() => {}} />
+        <Button name="Cadastrar" isLoading={true} onPress={() => {}} />
       </Container>
     </ScrollView>
   );
