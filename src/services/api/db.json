@@ -1,0 +1,40 @@
+{
+  "foods": [
+    {
+      "id": "1",
+      "name": "Macarrão",
+      "peso": "500g",
+      "foto": "https://www.jauserve.com.br/dw/image/v2/BFJL_PRD/on/demandware.static/-/Sites-jauserve-master/default/dw02c92d36/07206816000115_7896205722211_219178_1.png?sw=1800"
+    },
+    {
+      "id": "2",
+      "name": "Feijão",
+      "peso": "1kg",
+      "foto": "https://static.wixstatic.com/media/0e1286_f04abb779d8c49098d4b5e07693c48bb~mv2.png/v1/fit/w_500,h_500,q_90/file.png"
+    },
+    {
+      "id": "3",
+      "name": "Arroz",
+      "peso": "1kg",
+      "foto": "https://giassi.vtexassets.com/arquivos/ids/518739/Arroz-Branco-Tipo-1-Kiarroz-Pacote-5kg.png?v=637995392758500000"
+    },
+    {
+      "id": "4",
+      "name": "Fubá",
+      "peso": "500g",
+      "foto": "https://www.reideouroalimentos.ind.br/wp-content/uploads/2020/05/fortemilho-flocao-400g.png"
+    },
+    {
+      "id": "5",
+      "name": "Leite integral",
+      "peso": "1L",
+      "foto": "https://redemachado.com.br/arquivos/588706.png"
+    },
+    {
+      "id": "6",
+      "name": "Açúcar",
+      "peso": "1kg",
+      "foto": "https://giassi.vtexassets.com/arquivos/ids/519186/Acucar-Refinado-Uniao-Classicos-Pacote-5kg.png?v=637995415612130000"
+    }
+  ]
+}

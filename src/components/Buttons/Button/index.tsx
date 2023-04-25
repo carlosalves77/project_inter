@@ -13,9 +13,9 @@ const Button: React.FC<ButtonProps> = ({onPress, name, isLoading}) => {
   return (
     <Container onPress={onPress}>
       {isLoading ? (
-        <Title>{name}</Title>
-      ) : (
         <ActivityIndicator size="large" color="#fff" />
+      ) : (
+        <Title>{name}</Title>
       )}
     </Container>
   );

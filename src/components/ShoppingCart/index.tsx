@@ -5,11 +5,15 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import {THEME} from '../../theme';
 
-const ShoppingCart: React.FC = () => {
+interface ShoppingCartProps {
+  onPress: () => void;
+}
+
+const ShoppingCart: React.FC<ShoppingCartProps> = ({onPress}) => {
   const [quantity, setQuantity] = React.useState(1);
 
   return (
-    <Container>
+    <Container onPress={onPress}>
       <Icon name="basket-check" size={26} color="#fff" />
       {quantity ? (
         <BasketQuantity>

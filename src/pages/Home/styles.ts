@@ -72,15 +72,24 @@ export const Name = styled.Text`
   color: ${THEME.colors.blackGray};
 `;
 
+export const MapContent = styled.View`
+  width: 100%;
+  height: 348px;
+  background-color: red;
+  border-radius: 25px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+`;
+
 export const CardOptions = styled.View`
   flex-direction: row;
   width: 100%;
+  justify-content: space-between;
 `;
 
 export const Card = styled.TouchableOpacity`
   width: 96px;
   height: 81px;
-  background-color: black;
 `;
 
 export const CardImage = styled.Image`

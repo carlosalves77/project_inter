@@ -33,8 +33,6 @@ import {
   TextInfoDescription,
 } from './styles';
 
-import LinearGradient from 'react-native-linear-gradient';
-
 import {useNavigation} from '@react-navigation/native';
 import {AppNavigationProps} from '../../routes/index';
 
