@@ -51,7 +51,7 @@ const Login: React.FC = () => {
   const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [showPassword, setShowPassword] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const [modalLogin, setModalLogin] = React.useState(true);
 
@@ -91,7 +91,7 @@ const Login: React.FC = () => {
     try {
       if (user === 'carlos' && password === '123') {
         setTimeout(() => {
-          setIsLoading(false);
+          setIsLoading(true);
         }, 1000);
         handleToast();
         return navigation.navigate('Home');
@@ -101,12 +101,12 @@ const Login: React.FC = () => {
           ToastAndroid.SHORT,
           ToastAndroid.TOP,
         );
-        setIsLoading(true);
+        setIsLoading(false);
       }
     } catch {
       console.log('Erro ao fazer login');
     } finally {
-      setIsLoading(true);
+      setIsLoading(false);
     }
   };
 
@@ -156,7 +156,7 @@ const Login: React.FC = () => {
               keyboardType="default"
               onChangeText={text => setUser(text.replace(/\s/g, ''))}
               maxLength={12}
-              editable={isLoading}
+              editable={!isLoading}
               autoCorrect={false}
               value={user}
               underlineColorAndroid="transparent"
@@ -168,7 +168,7 @@ const Login: React.FC = () => {
                 keyboardType="default"
                 onChangeText={text => setPassword(text.replace(/\s/g, ''))}
                 value={password}
-                editable={isLoading}
+                editable={!isLoading}
                 secureTextEntry={!showPassword}
                 maxLength={12}
                 autoCorrect={false}

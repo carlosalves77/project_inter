@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {
   Container,
@@ -18,7 +18,7 @@ import {
 
 import Icon from 'react-native-vector-icons/Feather';
 
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {AppNavigationProps} from '../../routes';
 
 import {ShoppingCart} from '../../components/ShoppingCart';
@@ -28,14 +28,25 @@ import OutStock from '../../../assets/OutStock.png';
 import Revenue from '../../../assets/Revenue.png';
 import voluntary from '../../../assets/Voluntary.png';
 
+import {FeedBackModal} from '../../components/FeedBack';
+
 const Home: React.FC = () => {
   const navigation = useNavigation<AppNavigationProps>();
+  const route = useRoute();
+  const myFeedBack = route.params?.feedBack as boolean;
+
+  const [feedbackState] = useState(myFeedBack);
+
   const handleLogout = () => {
     console.log('Logout');
   };
 
   const handleDonation = () => {
     navigation.navigate('Donation');
+  };
+
+  const handleOutStock = () => {
+    navigation.navigate('OutStock');
   };
 
   return (
@@ -58,7 +69,7 @@ const Home: React.FC = () => {
         </TextAndShoppingCart>
         <MapContent>{/* <MapLocation /> */}</MapContent>
         <CardOptions>
-          <Card onPress={() => {}}>
+          <Card onPress={() => handleOutStock()}>
             <CardImage source={OutStock} />
           </Card>
           <Card onPress={() => {}}>
@@ -70,6 +81,7 @@ const Home: React.FC = () => {
         </CardOptions>
       </Content>
       <BottomViewStyle />
+      {myFeedBack ? <FeedBackModal onConfirm={!feedbackState} /> : null}
     </Container>
   );
 };

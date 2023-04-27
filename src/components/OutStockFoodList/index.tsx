@@ -8,8 +8,6 @@ import {
   FoodListImageContainer,
   FoodDescription,
   FoodListInfoContent,
-  AddOrRemove,
-  AddOrRemoveText,
   FoodQuantityValue,
   FoodQuantityValueText,
 } from './styles';
@@ -24,19 +22,7 @@ interface FoodDataProps extends IFoodDTO {
   data: IFoodDTO;
 }
 
-const FoodList: React.FC<FoodDataProps> = ({data}) => {
-  const [quantity, setQuantity] = React.useState({value: 0});
-
-  const handleAddQuantity = () => {
-    setQuantity({value: quantity.value + 1});
-  };
-
-  const handleRemoveQuantity = () => {
-    if (quantity.value > 0) {
-      setQuantity({value: quantity.value - 1});
-    }
-  };
-
+const OutStockFoodList: React.FC<FoodDataProps> = ({data}) => {
   return (
     <Container>
       <FoodListContent>
@@ -46,23 +32,17 @@ const FoodList: React.FC<FoodDataProps> = ({data}) => {
         <FoodListInfoContent>
           <FoodName>
             {data.name && data.name?.length > 11
-              ? `${data.name?.slice(0, 11)}...`
+              ? `${data.name?.slice(0, 8)}...`
               : data.name}
           </FoodName>
-          <FoodDescription>{data.peso}</FoodDescription>
+          <FoodDescription>1kg</FoodDescription>
         </FoodListInfoContent>
       </FoodListContent>
-      <AddOrRemove onPress={() => handleRemoveQuantity()}>
-        <AddOrRemoveText>-</AddOrRemoveText>
-      </AddOrRemove>
       <FoodQuantityValue>
-        <FoodQuantityValueText>{quantity.value}</FoodQuantityValueText>
+        <FoodQuantityValueText>1</FoodQuantityValueText>
       </FoodQuantityValue>
-      <AddOrRemove onPress={() => handleAddQuantity()}>
-        <AddOrRemoveText>+</AddOrRemoveText>
-      </AddOrRemove>
     </Container>
   );
 };
 
-export {FoodList};
+export {OutStockFoodList};

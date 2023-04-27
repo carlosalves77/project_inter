@@ -7,6 +7,7 @@ import {Home} from '../pages/Home';
 import {Login} from '../pages/Login';
 import {SignUp} from '../pages/SignUp';
 import {Donation} from '../pages/Donation';
+import {OutStock} from '../pages/OutStock';
 
 type AppRoutes = {
   Home: undefined;
@@ -14,6 +15,8 @@ type AppRoutes = {
   profile: undefined;
   SignUp: undefined;
   Donation: undefined;
+  FeedBack: undefined;
+  OutStock: undefined;
 };
 
 export type AppNavigationProps = NativeStackNavigationProp<AppRoutes>;
@@ -29,6 +32,7 @@ export function StackRoutes() {
       <stack.Screen name="Home" component={Home} />
       <stack.Screen name="SignUp" component={SignUp} />
       <stack.Screen name="Donation" component={Donation} />
+      <stack.Screen name="OutStock" component={OutStock} />
     </stack.Navigator>
   );
 }

@@ -137,6 +137,8 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+     namespace 'com.example.inter_project'
+
     defaultConfig {
         applicationId "com.inter_project"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -222,10 +224,17 @@ android {
             keyPassword 'android'
         }
     }
+
+    buildFeatures {
+    buildConfig true
+  }
+
+   
     buildTypes {
 
         debug {
             signingConfig signingConfigs.debug
+           
         }
         release {
             // Caution! In production, you need to generate your own keystore file.

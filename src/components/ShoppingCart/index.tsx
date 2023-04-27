@@ -6,14 +6,23 @@ import LinearGradient from 'react-native-linear-gradient';
 import {THEME} from '../../theme';
 
 interface ShoppingCartProps {
-  onPress: () => void;
+  onPress?: () => void;
+  disabled?: boolean;
 }
 
-const ShoppingCart: React.FC<ShoppingCartProps> = ({onPress}) => {
-  const [quantity, setQuantity] = React.useState(1);
+const ShoppingCart: React.FC<ShoppingCartProps> = ({onPress, disabled}) => {
+  const [quantity, setQuantity] = React.useState(0);
+
+  const handleIncrement = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const handleDecrement = () => {
+    setQuantity(quantity - 1);
+  };
 
   return (
-    <Container onPress={onPress}>
+    <Container onPress={onPress} disabled={disabled}>
       <Icon name="basket-check" size={26} color="#fff" />
       {quantity ? (
         <BasketQuantity>

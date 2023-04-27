@@ -26,7 +26,7 @@ const SignUp: React.FC = () => {
     {label: 'Confirm Password', value: ''},
   ]);
 
-  const [button1Active, setButton1Active] = React.useState(true);
+  const [button1Active, setButton1Active] = React.useState(false);
   const [button2Active, setButton2Active] = React.useState(false);
 
   const navigation = useNavigation();
@@ -108,7 +108,7 @@ const SignUp: React.FC = () => {
                 );
               }
             })}
-        <Button name="Cadastrar" isLoading={true} onPress={() => {}} />
+        <Button name="Cadastrar" isLoading={false} onPress={() => {}} />
       </Container>
     </ScrollView>
   );
