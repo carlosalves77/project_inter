@@ -93,6 +93,7 @@ const SignUp: React.FC = () => {
                 <UserTextInput
                   key={index}
                   placeholder={item}
+                  placeholderTextColor={THEME.colors.placeHolder}
                   onChangeText={value => handleInputChange(index, value)}
                 />
               );
@@ -103,6 +104,7 @@ const SignUp: React.FC = () => {
                   <UserTextInput
                     key={index}
                     placeholder={item}
+                    placeholderTextColor={THEME.colors.placeHolder}
                     onChangeText={value => handleInputChange(index, value)}
                   />
                 );

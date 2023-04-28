@@ -60,7 +60,7 @@ const OutStockList: React.FC = () => {
               nestedScrollEnabled
               showsVerticalScrollIndicator={false}>
               {outStockList.map((item: any) => (
-                <OutStockFoodList data={item} />
+                <OutStockFoodList data={item} key={item} />
               ))}
             </ScrollView>
           </ContentList>

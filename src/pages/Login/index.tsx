@@ -43,6 +43,7 @@ import LoginLogo from '../../../assets/LoginLogo.png';
 import welcomeFoodModal from '../../../assets/welcome-food.png';
 
 import Icon from 'react-native-vector-icons/Feather';
+import {THEME} from '../../theme';
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
@@ -153,6 +154,7 @@ const Login: React.FC = () => {
             <Title>Olá, novamente!</Title>
             <UserTextInput
               placeholder="Usuário"
+              placeholderTextColor={THEME.colors.placeHolder}
               keyboardType="default"
               onChangeText={text => setUser(text.replace(/\s/g, ''))}
               maxLength={12}
@@ -163,8 +165,8 @@ const Login: React.FC = () => {
             />
             <PasswordContent>
               <UserTextInput
-                style={{}}
                 placeholder="Senha"
+                placeholderTextColor={THEME.colors.placeHolder}
                 keyboardType="default"
                 onChangeText={text => setPassword(text.replace(/\s/g, ''))}
                 value={password}
@@ -179,9 +181,13 @@ const Login: React.FC = () => {
                   setShowPassword(!showPassword);
                 }}>
                 {showPassword ? (
-                  <Icon name="eye" size={28} />
+                  <Icon name="eye" size={28} color={THEME.colors.placeHolder} />
                 ) : (
-                  <Icon name="eye-off" size={28} />
+                  <Icon
+                    name="eye-off"
+                    size={28}
+                    color={THEME.colors.placeHolder}
+                  />
                 )}
               </ShowAndHidePasswordButton>
             </PasswordContent>

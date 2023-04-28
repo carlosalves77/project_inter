@@ -62,6 +62,7 @@ export const UserTextInput = styled.TextInput`
   font-weight: 800;
   font-size: ${RFValue(20)}px;
   text-decoration-line: none;
+  color: ${THEME.colors.black};
 `;
 
 export const PasswordContent = styled.View`
