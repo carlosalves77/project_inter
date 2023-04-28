@@ -43,6 +43,7 @@ import LoginLogo from '../../../assets/LoginLogo.png';
 import welcomeFoodModal from '../../../assets/welcome-food.png';
 
 import Icon from 'react-native-vector-icons/Feather';
+import {THEME} from '../../theme';
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
@@ -51,7 +52,7 @@ const Login: React.FC = () => {
   const [user, setUser] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [showPassword, setShowPassword] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const [modalLogin, setModalLogin] = React.useState(true);
 
@@ -91,7 +92,7 @@ const Login: React.FC = () => {
     try {
       if (user === 'carlos' && password === '123') {
         setTimeout(() => {
-          setIsLoading(false);
+          setIsLoading(true);
         }, 1000);
         handleToast();
         return navigation.navigate('Home');
@@ -101,12 +102,12 @@ const Login: React.FC = () => {
           ToastAndroid.SHORT,
           ToastAndroid.TOP,
         );
-        setIsLoading(true);
+        setIsLoading(false);
       }
     } catch {
       console.log('Erro ao fazer login');
     } finally {
-      setIsLoading(true);
+      setIsLoading(false);
     }
   };
 
@@ -153,22 +154,23 @@ const Login: React.FC = () => {
             <Title>Olá, novamente!</Title>
             <UserTextInput
               placeholder="Usuário"
+              placeholderTextColor={THEME.colors.placeHolder}
               keyboardType="default"
               onChangeText={text => setUser(text.replace(/\s/g, ''))}
               maxLength={12}
-              editable={isLoading}
+              editable={!isLoading}
               autoCorrect={false}
               value={user}
               underlineColorAndroid="transparent"
             />
             <PasswordContent>
               <UserTextInput
-                style={{}}
                 placeholder="Senha"
+                placeholderTextColor={THEME.colors.placeHolder}
                 keyboardType="default"
                 onChangeText={text => setPassword(text.replace(/\s/g, ''))}
                 value={password}
-                editable={isLoading}
+                editable={!isLoading}
                 secureTextEntry={!showPassword}
                 maxLength={12}
                 autoCorrect={false}
@@ -179,9 +181,13 @@ const Login: React.FC = () => {
                   setShowPassword(!showPassword);
                 }}>
                 {showPassword ? (
-                  <Icon name="eye" size={28} />
+                  <Icon name="eye" size={28} color={THEME.colors.placeHolder} />
                 ) : (
-                  <Icon name="eye-off" size={28} />
+                  <Icon
+                    name="eye-off"
+                    size={28}
+                    color={THEME.colors.placeHolder}
+                  />
                 )}
               </ShowAndHidePasswordButton>
             </PasswordContent>

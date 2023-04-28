@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-community/cli": "^11.2.0",
     "@react-native-community/geolocation": "^3.0.6",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
@@ -19,6 +20,7 @@
     "react": "18.1.0",
     "react-native": "^0.71.7",
     "react-native-asset": "^2.1.0",
+    "react-native-eject": "^0.2.0",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-maps": "^1.5.0",
     "react-native-responsive-fontsize": "^0.5.1",
@@ -28,7 +30,8 @@
     "react-native-toast-message": "^2.1.6",
     "react-native-vector-icons": "^9.2.0",
     "styled-components": "^5.3.9",
-    "styled-components-react-native": "^1.0.0"
+    "styled-components-react-native": "^1.0.0",
+    "zustand": "^4.3.7"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

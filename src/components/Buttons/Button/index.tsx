@@ -3,13 +3,16 @@ import {Container, Title} from './styles';
 
 import {ActivityIndicator} from 'react-native';
 
-interface ButtonProps {
+import {TouchableOpacityProps} from 'react-native';
+
+interface ButtonProps extends TouchableOpacityProps {
   name: string;
   onPress?: () => void;
   isLoading?: boolean;
+  size?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({onPress, name, isLoading}) => {
+const Button: React.FC<ButtonProps> = ({onPress, name, isLoading, size}) => {
   return (
     <Container onPress={onPress}>
       {isLoading ? (

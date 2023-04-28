@@ -14,7 +14,7 @@ export const Container = styled.View`
 `;
 
 export const FoodListContent = styled.View`
-  width: 75%;
+  width: 80%;
   height: 100%;
   border: 5px solid ${THEME.colors.red};
   border-radius: 22px;
@@ -61,15 +61,6 @@ export const FoodDescription = styled.Text`
   color: ${THEME.colors.black};
   margin-right: 10px;
   margin-left: 2px;
-`;
-
-export const AddOrRemove = styled.TouchableOpacity``;
-
-export const AddOrRemoveText = styled.Text`
-  font-family: ${THEME.fonts.extraBold};
-  font-size: ${RFValue(25)}px;
-  font-weight: 800;
-  color: ${THEME.colors.black};
 `;
 
 export const FoodQuantityValue = styled.View`
