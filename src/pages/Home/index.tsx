@@ -45,6 +45,14 @@ const Home: React.FC = () => {
     navigation.navigate('Donation');
   };
 
+  const handleRevenue = () => {
+    navigation.navigate('Revenue');
+  };
+
+  const handleVoluntary = () => {
+    navigation.navigate('Voluntary');
+  };
+
   const handleOutStock = () => {
     navigation.navigate('OutStock');
   };
@@ -72,10 +80,10 @@ const Home: React.FC = () => {
           <Card onPress={() => handleOutStock()}>
             <CardImage source={OutStock} />
           </Card>
-          <Card onPress={() => {}}>
+          <Card onPress={() => handleVoluntary()}>
             <CardImage source={voluntary} />
           </Card>
-          <Card onPress={() => {}}>
+          <Card onPress={() => handleRevenue()}>
             <CardImage source={Revenue} />
           </Card>
         </CardOptions>

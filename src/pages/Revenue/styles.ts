@@ -30,3 +30,33 @@ export const OutStockListText = styled.Text`
   color: ${THEME.colors.white};
   font-weight: 800;
 `;
+
+export const RevenueText = styled.Text`
+  font-family: ${THEME.fonts.regular};
+  font-style: normal;
+  font-size: ${RFValue(20)}px;
+  color: ${THEME.colors.lightGray};
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 28px;
+`;
+
+export const ShareButton = styled.TouchableOpacity`
+  width: 70%;
+  height: 61px;
+  align-items: center;
+  border-radius: 35px;
+  justify-content: center;
+  background-color: ${THEME.colors.white};
+  margin-top: 33px;
+  margin-bottom: 33px;
+`;
+
+export const ShareButtonText = styled.Text`
+  font-family: ${THEME.fonts.extraBold};
+  font-weight: 800;
+  font-style: normal;
+  font-size: ${RFValue(22)}px;
+  color: ${THEME.colors.red};
+  text-align: center;
+`;
