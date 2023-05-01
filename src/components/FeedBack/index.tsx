@@ -13,13 +13,13 @@ import {
 import {THEME} from '../../theme';
 
 import Icon from 'react-native-vector-icons/Ionicons';
-
 interface FeedBackModalProps {
-  onConfirm: boolean;
+  onClose: () => void;
 }
 
-const FeedBackModal: React.FC<FeedBackModalProps> = ({onConfirm}) => {
+const FeedBackModal: React.FC<FeedBackModalProps> = ({onClose}) => {
   const [rating, setRating] = useState(0);
+  const [onConfirm, setOnConfirm] = useState(false);
 
   const handleRate = (value: number) => {
     setRating(value);
@@ -41,9 +41,10 @@ const FeedBackModal: React.FC<FeedBackModalProps> = ({onConfirm}) => {
     return stars;
   };
 
-  const confirmRating = () => {
-    onConfirm = true;
+  const confirmRating = (onConfirm: () => void) => {
+    setOnConfirm(true);
     console.log('Avaliação confirmada', rating);
+    onConfirm();
   };
 
   return (
@@ -56,7 +57,7 @@ const FeedBackModal: React.FC<FeedBackModalProps> = ({onConfirm}) => {
         <FeedBackContentStars>
           {renderStars(rating, handleRate)}
         </FeedBackContentStars>
-        <ConfirmButton onPress={() => confirmRating()}>
+        <ConfirmButton onPress={() => confirmRating(onClose)}>
           <Icon name="checkmark-outline" size={28} color="red" />
         </ConfirmButton>
       </FeedBackCard>

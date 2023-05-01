@@ -9,6 +9,10 @@ import {Dimensions} from 'react-native';
 const windowHeight = Dimensions.get('window').height;
 const textPostion = windowHeight * 0.55;
 
+export const ContainerCenter = styled.View`
+  flex: 1;
+`;
+
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: ${THEME.colors.background};
@@ -42,7 +46,6 @@ export const LogoImage = styled.Image`
 
 export const Title = styled.Text`
   font-family: ${THEME.fonts.extraBold};
-  font-weight: 800;
   font-size: ${RFValue(36)}px;
   line-height: 49px;
   color: rgba(0, 0, 0, 0.71);
@@ -59,7 +62,6 @@ export const UserTextInput = styled.TextInput`
   margin-bottom: 8px;
 
   font-family: ${THEME.fonts.extraBold};
-  font-weight: 800;
   font-size: ${RFValue(20)}px;
   text-decoration-line: none;
   color: ${THEME.colors.black};
@@ -81,28 +83,27 @@ export const ForgetPasswordButton = styled.TouchableOpacity``;
 export const ForgetPasswordText = styled.Text`
   font-family: ${THEME.fonts.bold};
   font-style: normal;
-  font-weight: 800;
   font-size: ${RFValue(16)}px;
   line-height: 22px;
-  color: ${THEME.colors.gray};
+  color: ${THEME.colors.blackGray};
 `;
 
 export const NoAccountText = styled.Text`
-  font-family: ${THEME.fonts.bold};
+  font-family: ${THEME.fonts.extraBold};
   font-style: normal;
-  font-weight: 800;
   font-size: ${RFValue(20)}px;
   text-align: center;
   color: ${THEME.colors.black};
   margin-top: 30px;
 `;
 
-export const CreateAccountButton = styled.TouchableOpacity``;
+export const CreateAccountButton = styled.TouchableOpacity`
+  margin-bottom: 15px;
+`;
 
 export const CreateAccountText = styled.Text`
-  font-family: ${THEME.fonts.bold};
+  font-family: ${THEME.fonts.extraBold};
   font-style: normal;
-  font-weight: 800;
   font-size: ${RFValue(20)}px;
   text-align: center;
   color: ${THEME.colors.red};
@@ -138,17 +139,15 @@ export const TextInfoView = styled.View`
 `;
 
 export const TextInfo = styled.Text`
-  font-family: ${THEME.fonts.regular};
+  font-family: ${THEME.fonts.interExtraBold};
   font-style: normal;
-  font-weight: 800;
   font-size: ${RFValue(35)}px;
   color: ${THEME.colors.white};
 `;
 
 export const TextInfoDescription = styled.Text`
-  font-family: ${THEME.fonts.medium};
+  font-family: ${THEME.fonts.regular};
   font-style: normal;
-  font-weight: 300;
   font-size: ${RFValue(24)}px;
   color: ${THEME.colors.white};
 `;

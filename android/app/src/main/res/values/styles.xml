@@ -9,8 +9,8 @@
     </style>
 
     <style name="TimePickerTheme" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">#F04444</item>
-        <item name="android:colorAccent">#F04444</item>
+        <item name="colorAccent">#FF0000</item>
+        <item name="android:colorAccent">#FF0000</item>
     </style>
 
 </resources>

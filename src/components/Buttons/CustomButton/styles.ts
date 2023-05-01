@@ -23,7 +23,6 @@ export const Container = styled.TouchableOpacity.attrs<Props>({})<Props>`
 export const Text = styled.Text.attrs<Props>({})<Props>`
   font-family: ${THEME.fonts.extraBold};
   font-style: normal;
-  font-weight: 800;
   font-size: ${RFValue(14)}px;
   color: ${props => props.textColor};
 `;

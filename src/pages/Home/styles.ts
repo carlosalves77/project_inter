@@ -27,9 +27,21 @@ export const TopViewStyle = styled.View`
 
 export const BottomViewStyle = styled.View`
   width: 100%;
-  height: 40px;
-
+  height: 57px;
+  border-top-left-radius: 35px;
+  border-top-right-radius: 35px;
   background-color: ${THEME.colors.red};
+
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.45);
+`;
+
+export const BottomViewStyleText = styled.Text`
+  font-family: ${THEME.fonts.extraBold};
+  font-style: normal;
+  font-size: ${RFValue(25)}px;
+  color: ${THEME.colors.white};
 `;
 
 export const LogoutButton = styled.TouchableOpacity`
@@ -40,7 +52,7 @@ export const LogoutButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   margin-top: 5px;
-  align-self: flex-end;
+  align-self: center;
   margin-bottom: 10px;
 `;
 
@@ -56,9 +68,8 @@ export const TextContent = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-family: ${THEME.fonts.medium};
+  font-family: ${THEME.fonts.regular};
   font-style: normal;
-  font-weight: 500;
   font-size: ${RFValue(20)}px;
   color: ${THEME.colors.lightGray};
 `;
@@ -66,7 +77,6 @@ export const Title = styled.Text`
 export const Name = styled.Text`
   font-family: ${THEME.fonts.extraBold};
   font-style: normal;
-  font-weight: 800;
   font-size: ${RFValue(25)}px;
   color: ${THEME.colors.blackGray};
 `;

@@ -19,7 +19,6 @@ export const RevenueTitle = styled.Text`
   font-size: ${RFValue(20)}px;
   font-family: ${THEME.fonts.extraBold};
   color: ${THEME.colors.white};
-  font-weight: 800;
 `;
 
 export const RevenuePeopleName = styled.Text`

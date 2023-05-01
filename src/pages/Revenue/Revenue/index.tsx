@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, ScrollView, LogBox} from 'react-native';
+import {FlatList, ScrollView, LogBox, View} from 'react-native';
 
 LogBox.ignoreAllLogs();
 
@@ -12,11 +12,11 @@ import {
   ShareButtonText,
 } from './styles';
 
-import {RevenueList} from '../../components/RevenueList';
-import {BackButton} from '../../components/Buttons/BackButton';
+import {RevenueList} from '../../../components/RevenueList';
+import {BackButton} from '../../../components/Buttons/BackButton';
 
 import {useNavigation} from '@react-navigation/native';
-import {AppNavigationProps} from '../../routes';
+import {AppNavigationProps} from '../../../routes';
 
 const Revenue: React.FC = () => {
   const data = [
@@ -32,10 +32,10 @@ const Revenue: React.FC = () => {
     },
     {id: '3', revenue: 'Arroz carioca', name: 'Aline Oliveira'},
   ];
-
   const [revenue] = React.useState(data);
 
   const navigation = useNavigation<AppNavigationProps>();
+
   const handleBack = () => {
     navigation.navigate('Home');
   };
@@ -53,9 +53,9 @@ const Revenue: React.FC = () => {
         <RevenueText>
           Compartilhe receitas baseadas{'\n'}nos alimentos doados,{'\n'}
           promovendo a sustentabilidade e{'\n'}a utilização total dos alimentos.
-          {'\n'}As receitas devem ser{'\n'}compartilhadas de maneira clara{'\n'}
-          e fácil de entender, e podem{'\n'}incluir instruções passo a passo e
-          {'\n'}fotos dos pratos.
+          {'\n'}As receitas devem ser{'\n'}compartilhadas de maneira clara
+          {'\n'}e fácil de entender, e podem{'\n'}incluir instruções passo a
+          passo e{'\n'}fotos dos pratos.
         </RevenueText>
         <FlatList
           style={{width: '100%', height: 300}}
@@ -65,7 +65,7 @@ const Revenue: React.FC = () => {
           showsVerticalScrollIndicator={false}
           renderItem={({item}) => <RevenueList data={item} />}
         />
-        <ShareButton>
+        <ShareButton onPress={() => navigation.navigate('RevenueList')}>
           <ShareButtonText>Compartilhe sua receita</ShareButtonText>
         </ShareButton>
       </ScrollView>

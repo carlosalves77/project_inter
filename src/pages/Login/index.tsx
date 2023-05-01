@@ -4,8 +4,6 @@ import {
   ScrollView,
   Platform,
   KeyboardAvoidingView,
-  ToastAndroid,
-  View,
   Animated,
   Dimensions,
 } from 'react-native';
@@ -31,6 +29,7 @@ import {
   TextInfoView,
   TextInfo,
   TextInfoDescription,
+  ContainerCenter,
 } from './styles';
 
 import {useNavigation} from '@react-navigation/native';
@@ -44,6 +43,11 @@ import welcomeFoodModal from '../../../assets/welcome-food.png';
 
 import Icon from 'react-native-vector-icons/Feather';
 import {THEME} from '../../theme';
+
+type FormData = {
+  user: string;
+  password: string;
+};
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
@@ -79,33 +83,26 @@ const Login: React.FC = () => {
     }, 500);
   };
 
-  const handleToast = () => {
+  const handleToastFail = () => {
     Toast.show({
-      type: 'success',
-      text1: 'Hello',
-      text2: 'Login efetuado com sucesso!',
+      type: 'error',
+      text1: 'Login ou senha inválido!',
     });
     console.log('Toast');
   };
 
-  const handleLogin = async (user: string, password: string) => {
+  const handleLogin = async ({user, password}: FormData) => {
     try {
-      if (user === 'carlos' && password === '123') {
-        setTimeout(() => {
-          setIsLoading(true);
-        }, 1000);
-        handleToast();
-        return navigation.navigate('Home');
-      } else {
-        ToastAndroid.showWithGravity(
-          'Falha ao efetuar o login',
-          ToastAndroid.SHORT,
-          ToastAndroid.TOP,
-        );
-        setIsLoading(false);
-      }
-    } catch {
-      console.log('Erro ao fazer login');
+      setTimeout(() => {
+        if (user === 'carlos' && password === '123') {
+          return navigation.navigate('Home');
+        } else {
+          handleToastFail();
+          setIsLoading(false);
+        }
+      }, 2000);
+    } catch (error) {
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -116,7 +113,7 @@ const Login: React.FC = () => {
   };
 
   return (
-    <View>
+    <ContainerCenter>
       {modalLogin ? (
         <Animated.View
           style={[
@@ -147,7 +144,6 @@ const Login: React.FC = () => {
           <Container>
             <StatusBar hidden />
 
-            <Toast position="top" />
             <LogoCard>
               <LogoImage source={LoginLogo} />
             </LogoCard>
@@ -199,7 +195,7 @@ const Login: React.FC = () => {
             </ForgetPasswordContent>
             <Button
               name="Entrar"
-              onPress={() => handleLogin(user, password)}
+              onPress={() => handleLogin({user, password})}
               isLoading={isLoading}
             />
             <NoAccountText>Não pussui conta?</NoAccountText>
@@ -207,9 +203,10 @@ const Login: React.FC = () => {
               <CreateAccountText>Cadastre-se agora</CreateAccountText>
             </CreateAccountButton>
           </Container>
+          <Toast position="top" />
         </ScrollView>
       )}
-    </View>
+    </ContainerCenter>
   );
 };
 

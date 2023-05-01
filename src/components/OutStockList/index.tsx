@@ -20,25 +20,74 @@ import OutStock from '../../../assets/outStockOng.png';
 import {OutStockFoodList} from '../OutStockFoodList';
 import api from '../../services/api/api';
 
+import {useNavigation} from '@react-navigation/native';
+import {AppNavigationProps} from '../../routes';
+
 const OutStockList: React.FC = () => {
   const [onOpen, setOnOpen] = React.useState(false);
-  const [outStockList, setOutStockList] = React.useState([]);
 
-  useEffect(() => {
-    const fetchOutStockList = async () => {
-      try {
-        const response = await api.get('/foods');
-        const data = response.data;
-        setOutStockList(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchOutStockList();
-  }, []);
+  const navigation = useNavigation<AppNavigationProps>();
+
+  const foods = [
+    {
+      id: '1',
+      name: 'Macarrão',
+      peso: '500g',
+      foto: 'https://i.ibb.co/TmtRqkJ/Macarr-o.png',
+    },
+    {
+      id: '2',
+      name: 'Feijão',
+      peso: '1kg',
+      foto: 'https://i.ibb.co/hyL9NWQ/Feij-o.png',
+    },
+    {
+      id: '3',
+      name: 'Arroz',
+      peso: '1kg',
+      foto: 'https://i.ibb.co/9r1gq4z/Arroz.png',
+    },
+    {
+      id: '4',
+      name: 'Fubá',
+      peso: '500g',
+      foto: 'https://i.ibb.co/h7HnHJm/Floc-o.png',
+    },
+    {
+      id: '5',
+      name: 'Leite integral',
+      peso: '1L',
+      foto: 'https://i.ibb.co/R6pCLgY/Leite-Integral.png',
+    },
+    {
+      id: '6',
+      name: 'Açúcar',
+      peso: '1kg',
+      foto: 'https://i.ibb.co/GvPDNvF/A-ucar.png',
+    },
+  ];
+
+  const [outStockList] = React.useState(foods);
+
+  //   useEffect(() => {
+  //     const fetchOutStockList = async () => {
+  //       try {
+  //         const response = await api.get('/foods');
+  //         const data = response.data;
+  //         setOutStockList(data);
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     };
+  //     fetchOutStockList();
+  //   }, []);
 
   const handleOnOpen = () => {
     setOnOpen(!onOpen);
+  };
+
+  const handleDonate = () => {
+    navigation.navigate('Home', {feedBack: true});
   };
 
   return (
@@ -64,7 +113,7 @@ const OutStockList: React.FC = () => {
               ))}
             </ScrollView>
           </ContentList>
-          <DonateButton>
+          <DonateButton onPress={() => handleDonate()}>
             <DonateText>Doar</DonateText>
           </DonateButton>
         </OnOpenContainer>

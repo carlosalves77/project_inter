@@ -22,19 +22,22 @@ interface IFoodDTO {
 
 interface FoodDataProps extends IFoodDTO {
   data: IFoodDTO;
+  onQuantityChange: (add: boolean) => void;
 }
 
-const FoodList: React.FC<FoodDataProps> = ({data}) => {
+const FoodList: React.FC<FoodDataProps> = ({data, onQuantityChange}) => {
   const [quantity, setQuantity] = React.useState({value: 0});
 
-  const handleAddQuantity = () => {
-    setQuantity({value: quantity.value + 1});
-  };
-
-  const handleRemoveQuantity = () => {
-    if (quantity.value > 0) {
-      setQuantity({value: quantity.value - 1});
+  const handleQuantityChange = (add: boolean) => {
+    if (add) {
+      setQuantity({value: quantity.value + 1});
+    } else {
+      if (quantity.value > 0) {
+        setQuantity({value: quantity.value - 1});
+      }
     }
+
+    return onQuantityChange(add);
   };
 
   return (
@@ -52,13 +55,13 @@ const FoodList: React.FC<FoodDataProps> = ({data}) => {
           <FoodDescription>{data.peso}</FoodDescription>
         </FoodListInfoContent>
       </FoodListContent>
-      <AddOrRemove onPress={() => handleRemoveQuantity()}>
+      <AddOrRemove onPress={() => handleQuantityChange(false)}>
         <AddOrRemoveText>-</AddOrRemoveText>
       </AddOrRemove>
       <FoodQuantityValue>
         <FoodQuantityValueText>{quantity.value}</FoodQuantityValueText>
       </FoodQuantityValue>
-      <AddOrRemove onPress={() => handleAddQuantity()}>
+      <AddOrRemove onPress={() => handleQuantityChange(true)}>
         <AddOrRemoveText>+</AddOrRemoveText>
       </AddOrRemove>
     </Container>

@@ -29,14 +29,12 @@ export const VoluntaryListText = styled.Text`
   font-family: ${THEME.fonts.bold};
   font-size: ${RFValue(18)}px;
   color: ${THEME.colors.white};
-  font-weight: 800;
 `;
 
 export const VoluntaryText = styled.Text`
-  font-family: ${THEME.fonts.regular};
+  font-family: ${THEME.fonts.extraBold};
   font-size: ${RFValue(20)}px;
   color: ${THEME.colors.lightGray};
-  font-weight: 800;
   text-align: center;
   margin-bottom: 28px;
 `;
@@ -51,7 +49,6 @@ export const TextInput = styled(Input)`
   margin-bottom: 24px;
 
   font-family: ${THEME.fonts.extraBold};
-  font-weight: 800;
   font-size: ${RFValue(20)}px;
   text-decoration-line: none;
   color: ${THEME.colors.black};
@@ -67,10 +64,9 @@ export const TimeInformation = styled.View`
 `;
 
 export const TimeInformationText = styled.Text`
-  font-family: ${THEME.fonts.bold};
+  font-family: ${THEME.fonts.extraBold};
   font-size: ${RFValue(18)}px;
   color: ${THEME.colors.black};
-  font-weight: 800;
 `;
 
 export const TimeButton = styled.TouchableOpacity`
@@ -86,7 +82,6 @@ export const TimeButtonText = styled.Text`
   font-family: ${THEME.fonts.extraBold};
   font-size: ${RFValue(26)}px;
   color: ${THEME.colors.white};
-  font-weight: 800;
 `;
 
 export const TextInputAtuation = styled(Input)`
@@ -98,7 +93,6 @@ export const TextInputAtuation = styled(Input)`
   margin-top: 10px;
 
   font-family: ${THEME.fonts.extraBold};
-  font-weight: 800;
   font-size: ${RFValue(20)}px;
   text-decoration-line: none;
   color: ${THEME.colors.black};

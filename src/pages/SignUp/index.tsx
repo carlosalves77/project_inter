@@ -26,7 +26,7 @@ const SignUp: React.FC = () => {
     {label: 'Confirm Password', value: ''},
   ]);
 
-  const [button1Active, setButton1Active] = React.useState(false);
+  const [button1Active, setButton1Active] = React.useState(true);
   const [button2Active, setButton2Active] = React.useState(false);
 
   const navigation = useNavigation();
@@ -48,12 +48,12 @@ const SignUp: React.FC = () => {
   };
 
   const handleButton1Press = () => {
-    setButton1Active(!button1Active);
+    setButton1Active(true);
     setButton2Active(false);
   };
 
   const handleButton2Press = () => {
-    setButton2Active(!button2Active);
+    setButton2Active(true);
     setButton1Active(false);
   };
 

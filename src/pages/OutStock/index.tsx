@@ -12,7 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 
 const OutStock: React.FC = () => {
   const navigation = useNavigation<AppNavigationProps>();
-  const data = [{key: '1'}, {key: '2'}, {key: '3'}];
+  const data: any = [{key: '1'}, {key: '2'}, {key: '3'}];
 
   const handleBack = () => {
     navigation.navigate('Home');

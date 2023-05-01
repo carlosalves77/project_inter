@@ -46,7 +46,45 @@ const Donation: React.FC<CustomButtonProps> = ({
   quantity,
   ...rest
 }) => {
-  const [donations, setDonations] = React.useState([]);
+  const foods = [
+    {
+      id: '1',
+      name: 'Macarrão',
+      peso: '500g',
+      foto: 'https://i.ibb.co/TmtRqkJ/Macarr-o.png',
+    },
+    {
+      id: '2',
+      name: 'Feijão',
+      peso: '1kg',
+      foto: 'https://i.ibb.co/hyL9NWQ/Feij-o.png',
+    },
+    {
+      id: '3',
+      name: 'Arroz',
+      peso: '1kg',
+      foto: 'https://i.ibb.co/9r1gq4z/Arroz.png',
+    },
+    {
+      id: '4',
+      name: 'Fubá',
+      peso: '500g',
+      foto: 'https://i.ibb.co/h7HnHJm/Floc-o.png',
+    },
+    {
+      id: '5',
+      name: 'Leite integral',
+      peso: '1L',
+      foto: 'https://i.ibb.co/R6pCLgY/Leite-Integral.png',
+    },
+    {
+      id: '6',
+      name: 'Açúcar',
+      peso: '1kg',
+      foto: 'https://i.ibb.co/GvPDNvF/A-ucar.png',
+    },
+  ];
+  const [donations] = React.useState(foods);
   const [endDonation, setEndDonation] = React.useState(true);
 
   const [button1Active, setButton1Active] = React.useState(false);
@@ -56,18 +94,17 @@ const Donation: React.FC<CustomButtonProps> = ({
 
   const navigation = useNavigation<AppNavigationProps>();
 
-  useEffect(() => {
-    const fetchDonations = async () => {
-      try {
-        const response = await api.get('/foods');
-        const data = response.data;
-        setDonations(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchDonations();
-  }, []);
+  //   useEffect(() => {
+  //     const fetchDonations = async () => {
+  //       try {
+  //         const response = await api.get('/foods');
+  //         const data = response.data;
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     };
+  //     fetchDonations();
+  //   }, []);
 
   const handleBack = () => {
     if (endDonation) {
@@ -110,11 +147,13 @@ const Donation: React.FC<CustomButtonProps> = ({
       {endDonation ? (
         <Content>
           <FlatList
-            style={{marginTop: 20}}
+            style={{marginTop: 20, width: '100%'}}
             data={donations}
             //@ts-ignore
             keyExtractor={item => item.id}
-            renderItem={({item}) => <FoodList data={item} />}
+            renderItem={({item}) => (
+              <FoodList data={item} onQuantityChange={() => {}} />
+            )}
             showsVerticalScrollIndicator={false}
           />
           <ButtonContent>
@@ -138,15 +177,18 @@ const Donation: React.FC<CustomButtonProps> = ({
                     alignItems: 'center',
                   }}
                   indicatorStyle="white"
-                  nestedScrollEnabled={true}>
-                  {donations.map((item: any) => (
-                    <DonationTotalCardContent>
-                      <DonationTotalCardTitle>
+                  nestedScrollEnabled={true}
+                  showsVerticalScrollIndicator={false}>
+                  {donations.map((item: any, index) => (
+                    <DonationTotalCardContent key={index}>
+                      <DonationTotalCardTitle key={index}>
                         {item.name}
                       </DonationTotalCardTitle>
-                      <DonationTotalCardText>{item.peso}</DonationTotalCardText>
-                      <DonationTotalCardCircle>
-                        <DonationTotalCardCircleValue>
+                      <DonationTotalCardText key={index}>
+                        {item.peso}
+                      </DonationTotalCardText>
+                      <DonationTotalCardCircle key={index}>
+                        <DonationTotalCardCircleValue key={index}>
                           3
                         </DonationTotalCardCircleValue>
                       </DonationTotalCardCircle>
@@ -155,17 +197,6 @@ const Donation: React.FC<CustomButtonProps> = ({
                 </ScrollView>
               </View>
 
-              {/* <DonationTotalCardContent>
-                <DonationTotalCardTitle>Leite Integral</DonationTotalCardTitle>
-                <DonationTotalCardText>500g</DonationTotalCardText>
-                <DonationTotalCardCircle>
-                  <DonationTotalCardCircleValue>3</DonationTotalCardCircleValue>
-                </DonationTotalCardCircle>
-              </DonationTotalCardContent> */}
-
-              {
-                // <DonationTotalChosenCardContent>
-              }
               <DonationTotalChosenCardContent>
                 <DonationTotalChosenCard
                   onPress={() => handleButton1Press()}

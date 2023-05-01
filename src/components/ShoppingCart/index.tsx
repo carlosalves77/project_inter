@@ -1,7 +1,8 @@
 import React from 'react';
-import {Container, BasketQuantity, BasketQuantityText} from './styles';
+import {Container, BasketQuantity, BasketQuantityText, Basket} from './styles';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Cart from '../../../assets/ShoppingCart.png';
 import LinearGradient from 'react-native-linear-gradient';
 import {THEME} from '../../theme';
 
@@ -11,7 +12,7 @@ interface ShoppingCartProps {
 }
 
 const ShoppingCart: React.FC<ShoppingCartProps> = ({onPress, disabled}) => {
-  const [quantity, setQuantity] = React.useState(0);
+  const [quantity, setQuantity] = React.useState(2);
 
   const handleIncrement = () => {
     setQuantity(quantity + 1);
@@ -23,7 +24,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({onPress, disabled}) => {
 
   return (
     <Container onPress={onPress} disabled={disabled}>
-      <Icon name="basket-check" size={26} color="#fff" />
+      <Basket source={Cart} />
       {quantity ? (
         <BasketQuantity>
           <BasketQuantityText>{quantity}</BasketQuantityText>

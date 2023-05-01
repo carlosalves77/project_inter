@@ -33,18 +33,17 @@ export const Header = styled.View`
 
 export const DonationListContent = styled.View`
   width: 126px;
+  height: 55px;
   background-color: ${THEME.colors.red};
   border-radius: 37px;
   align-items: center;
   justify-content: center;
-  padding: 8px;
 `;
 
 export const DonationListText = styled.Text`
-  font-family: ${THEME.fonts.bold};
+  font-family: ${THEME.fonts.extraBold};
   font-size: ${RFValue(18)}px;
   color: ${THEME.colors.white};
-  font-weight: 800;
 `;
 
 export const DonationList = styled.View`

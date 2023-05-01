@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {ScrollView} from 'react-native';
 
 import {
   Container,
@@ -14,6 +15,7 @@ import {
   Card,
   CardImage,
   MapContent,
+  BottomViewStyleText,
 } from './styles';
 
 import Icon from 'react-native-vector-icons/Feather';
@@ -30,15 +32,18 @@ import voluntary from '../../../assets/Voluntary.png';
 
 import {FeedBackModal} from '../../components/FeedBack';
 
+interface MyParams {
+  feedBack: boolean;
+}
+
 const Home: React.FC = () => {
   const navigation = useNavigation<AppNavigationProps>();
   const route = useRoute();
-  const myFeedBack = route.params?.feedBack as boolean;
 
-  const [feedbackState] = useState(myFeedBack);
+  const myFeedBack = (route.params as MyParams)?.feedBack;
 
   const handleLogout = () => {
-    console.log('Logout');
+    navigation.navigate('Login');
   };
 
   const handleDonation = () => {
@@ -57,39 +62,49 @@ const Home: React.FC = () => {
     navigation.navigate('OutStock');
   };
 
+  const handleCloseFeedBack = () => {
+    navigation.navigate('Home', {feedBack: false});
+  };
+
   return (
     <Container>
       <TopViewStyle />
-      <Content>
-        <LogoutButton onPress={() => handleLogout()}>
-          <Icon name="log-out" size={24} color="#fff" />
-        </LogoutButton>
-        <TextAndShoppingCart>
-          <TextContent>
-            <Title>Seja bem-vindo,</Title>
-            <Name>Gabriel Monteiro</Name>
-          </TextContent>
-          <ShoppingCart
-            onPress={() => {
-              handleDonation();
-            }}
-          />
-        </TextAndShoppingCart>
-        <MapContent>{/* <MapLocation /> */}</MapContent>
-        <CardOptions>
-          <Card onPress={() => handleOutStock()}>
-            <CardImage source={OutStock} />
-          </Card>
-          <Card onPress={() => handleVoluntary()}>
-            <CardImage source={voluntary} />
-          </Card>
-          <Card onPress={() => handleRevenue()}>
-            <CardImage source={Revenue} />
-          </Card>
-        </CardOptions>
-      </Content>
-      <BottomViewStyle />
-      {myFeedBack ? <FeedBackModal onConfirm={!feedbackState} /> : null}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Content>
+          <LogoutButton onPress={() => handleLogout()}>
+            <Icon name="log-out" size={24} color="#fff" />
+          </LogoutButton>
+          <TextAndShoppingCart>
+            <TextContent>
+              <Title>Seja bem-vindo,</Title>
+              <Name>Gabriel Monteiro</Name>
+            </TextContent>
+            <ShoppingCart
+              onPress={() => {
+                handleDonation();
+              }}
+            />
+          </TextAndShoppingCart>
+          <MapContent>{/* <MapLocation /> */}</MapContent>
+          <CardOptions>
+            <Card onPress={() => handleOutStock()}>
+              <CardImage source={OutStock} />
+            </Card>
+            <Card onPress={() => handleVoluntary()}>
+              <CardImage source={voluntary} />
+            </Card>
+            <Card onPress={() => handleRevenue()}>
+              <CardImage source={Revenue} />
+            </Card>
+          </CardOptions>
+        </Content>
+      </ScrollView>
+      <BottomViewStyle>
+        <BottomViewStyleText>Compartilhe sua Ação</BottomViewStyleText>
+      </BottomViewStyle>
+      {myFeedBack ? (
+        <FeedBackModal onClose={() => handleCloseFeedBack()} />
+      ) : null}
     </Container>
   );
 };

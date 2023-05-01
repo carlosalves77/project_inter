@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import {Platform} from 'react-native';
 
-import {THEME} from '../../theme';
+import {THEME} from '../../../theme';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 export const Container = styled.View`
@@ -25,18 +25,17 @@ export const OutStockContent = styled.View`
 `;
 
 export const OutStockListText = styled.Text`
-  font-family: ${THEME.fonts.bold};
+  font-family: ${THEME.fonts.extraBold};
   font-size: ${RFValue(18)}px;
   color: ${THEME.colors.white};
-  font-weight: 800;
+  text-align: center;
 `;
 
 export const RevenueText = styled.Text`
-  font-family: ${THEME.fonts.regular};
+  font-family: ${THEME.fonts.bold};
   font-style: normal;
   font-size: ${RFValue(20)}px;
   color: ${THEME.colors.lightGray};
-  font-weight: 800;
   text-align: center;
   margin-bottom: 28px;
 `;
@@ -54,9 +53,9 @@ export const ShareButton = styled.TouchableOpacity`
 
 export const ShareButtonText = styled.Text`
   font-family: ${THEME.fonts.extraBold};
-  font-weight: 800;
+
   font-style: normal;
-  font-size: ${RFValue(22)}px;
+  font-size: ${RFValue(20)}px;
   color: ${THEME.colors.red};
   text-align: center;
 `;
