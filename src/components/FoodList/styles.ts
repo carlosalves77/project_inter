@@ -67,6 +67,7 @@ export const AddOrRemoveText = styled.Text`
   font-family: ${THEME.fonts.extraBold};
   font-size: ${RFValue(25)}px;
   color: ${THEME.colors.black};
+  padding: 6px;
 `;
 
 export const FoodQuantityValue = styled.View`

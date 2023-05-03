@@ -14,8 +14,11 @@ import {
   CardOptions,
   Card,
   CardImage,
-  MapContent,
   BottomViewStyleText,
+  MapContainer,
+  MapContent,
+  MapTitle,
+  MapTextContent,
 } from './styles';
 
 import Icon from 'react-native-vector-icons/Feather';
@@ -24,13 +27,13 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {AppNavigationProps} from '../../routes';
 
 import {ShoppingCart} from '../../components/ShoppingCart';
-import {MapLocation} from '../../components/MapLocation';
 
 import OutStock from '../../../assets/OutStock.png';
 import Revenue from '../../../assets/Revenue.png';
 import voluntary from '../../../assets/Voluntary.png';
 
 import {FeedBackModal} from '../../components/FeedBack';
+import {MapLocation} from '../MapLocation';
 
 interface MyParams {
   feedBack: boolean;
@@ -66,6 +69,10 @@ const Home: React.FC = () => {
     navigation.navigate('Home', {feedBack: false});
   };
 
+  const handleMaps = () => {
+    navigation.navigate('MapLocation', {showModal: true});
+  };
+
   return (
     <Container>
       <TopViewStyle />
@@ -85,7 +92,14 @@ const Home: React.FC = () => {
               }}
             />
           </TextAndShoppingCart>
-          <MapContent>{/* <MapLocation /> */}</MapContent>
+          <MapContainer activeOpacity={0.7} onPress={() => handleMaps()}>
+            <MapLocation />
+            <MapContent>
+              <MapTextContent>
+                <MapTitle>Encontre a ONG mais próxima</MapTitle>
+              </MapTextContent>
+            </MapContent>
+          </MapContainer>
           <CardOptions>
             <Card onPress={() => handleOutStock()}>
               <CardImage source={OutStock} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {
   Container,
@@ -14,30 +14,41 @@ import {
   FoodQuantityValueText,
 } from './styles';
 
+import {useDispatch, useSelector} from 'react-redux';
+import {decrement, increment} from '../../redux/useSlice';
+
 interface IFoodDTO {
   foto?: string;
   name?: string;
   peso?: string;
+  id?: string;
 }
 
 interface FoodDataProps extends IFoodDTO {
   data: IFoodDTO;
-  onQuantityChange: (add: boolean) => void;
+  index: number;
 }
 
-const FoodList: React.FC<FoodDataProps> = ({data, onQuantityChange}) => {
-  const [quantity, setQuantity] = React.useState({value: 0});
+const FoodList: React.FC<FoodDataProps> = ({data, index}) => {
+  const dispatch = useDispatch();
 
-  const handleQuantityChange = (add: boolean) => {
-    if (add) {
-      setQuantity({value: quantity.value + 1});
-    } else {
-      if (quantity.value > 0) {
-        setQuantity({value: quantity.value - 1});
-      }
-    }
+  const {value} = useSelector((state: any) => state.listValue);
 
-    return onQuantityChange(add);
+  const handleQuantityAdd = (item: object) => {
+    dispatch(increment(item));
+  };
+
+  const handleQuantityRemove = (item: object) => {
+    dispatch(decrement(item));
+  };
+
+  //@ts-ignore
+  const countById = (data, id) => {
+    return data.reduce(
+      //@ts-ignore
+      (count, item) => (item.id === id ? count + 1 : count),
+      0,
+    );
   };
 
   return (
@@ -55,13 +66,15 @@ const FoodList: React.FC<FoodDataProps> = ({data, onQuantityChange}) => {
           <FoodDescription>{data.peso}</FoodDescription>
         </FoodListInfoContent>
       </FoodListContent>
-      <AddOrRemove onPress={() => handleQuantityChange(false)}>
+      <AddOrRemove onPress={() => handleQuantityRemove(data)}>
         <AddOrRemoveText>-</AddOrRemoveText>
       </AddOrRemove>
       <FoodQuantityValue>
-        <FoodQuantityValueText>{quantity.value}</FoodQuantityValueText>
+        <FoodQuantityValueText>
+          {countById(value, data.id)}
+        </FoodQuantityValueText>
       </FoodQuantityValue>
-      <AddOrRemove onPress={() => handleQuantityChange(true)}>
+      <AddOrRemove onPress={() => handleQuantityAdd(data)}>
         <AddOrRemoveText>+</AddOrRemoveText>
       </AddOrRemove>
     </Container>

@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {Platform} from 'react-native';
+import {Platform, TextInput as input} from 'react-native';
 
 import {THEME} from '../../theme';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -81,19 +81,53 @@ export const Name = styled.Text`
   color: ${THEME.colors.blackGray};
 `;
 
-export const MapContent = styled.View`
+export const MapContainer = styled.TouchableOpacity`
   width: 100%;
-  height: 348px;
-  background-color: red;
-  border-radius: 25px;
+  height: 418px;
+  background-color: ${THEME.colors.white};
+  border-radius: 56px;
   margin-top: 20px;
   margin-bottom: 20px;
+  border: 20px solid ${THEME.colors.red};
+`;
+
+export const MapContent = styled.View`
+  width: 110%;
+  height: 110%;
+  align-items: center;
+
+  border-radius: 56px;
+  border: 20px solid ${THEME.colors.red};
+  position: absolute;
+  right: -15px;
+  top: -20px;
+  z-index: 99;
+`;
+
+export const MapTextContent = styled.View`
+  position: absolute;
+  height: 15%;
+  border-radius: 25px;
+  width: 100%;
+  background-color: ${THEME.colors.red};
+  bottom: 0;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const MapTitle = styled.Text`
+  font-family: ${THEME.fonts.regular};
+  font-style: normal;
+  font-size: ${RFValue(18)}px;
+  color: ${THEME.colors.white};
+  align-self: center;
 `;
 
 export const CardOptions = styled.View`
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+  margin-bottom: 29px;
 `;
 
 export const Card = styled.TouchableOpacity`

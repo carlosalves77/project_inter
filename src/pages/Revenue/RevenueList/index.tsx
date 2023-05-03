@@ -1,5 +1,9 @@
-import React from 'react';
-import {ScrollView} from 'react-native';
+import React, {useState} from 'react';
+import {
+  NativeSyntheticEvent,
+  ScrollView,
+  TextInputKeyPressEventData,
+} from 'react-native';
 
 import {
   ButtonContent,
@@ -19,10 +23,22 @@ import {useNavigation} from '@react-navigation/native';
 import {AppNavigationProps} from '../../../routes';
 
 const RevenueList: React.FC = () => {
+  const [text, setText] = useState('');
   const navigation = useNavigation<AppNavigationProps>();
 
   const handleBackButton = () => {
     navigation.goBack();
+  };
+
+  const handleKeyPress = (
+    e: NativeSyntheticEvent<TextInputKeyPressEventData>,
+  ) => {
+    // Detecta se a tecla pressionada é a tecla "Enter"
+    if (e.nativeEvent.key === 'Enter') {
+      // Adiciona um ponto na nova linha
+      console.log('aaaa');
+      setText(text + '\n• ');
+    }
   };
 
   return (
@@ -44,15 +60,17 @@ const RevenueList: React.FC = () => {
         <TextInput
           placeholder="ingredientes"
           placeholderTextColor={THEME.colors.placeHolder}
-          onChangeText={text => console.log(text)}
+          onChangeText={(value: string) => setText(value)}
           autoCorrect={false}
-          multiline
+          value={text}
+          multiline={true}
           textAlignVertical="top"
+          onKeyPress={() => handleKeyPress}
         />
         <TextInput
           placeholder="Modo de preparo"
           placeholderTextColor={THEME.colors.placeHolder}
-          onChangeText={text => console.log(text)}
+          onChangeText={value => setText(value)}
           autoCorrect={false}
           multiline
           textAlignVertical="top"

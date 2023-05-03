@@ -1,10 +1,12 @@
 import React from 'react';
 import {Container, BasketQuantity, BasketQuantityText, Basket} from './styles';
 
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {THEME} from '../../theme';
+
 import Cart from '../../../assets/ShoppingCart.png';
 import LinearGradient from 'react-native-linear-gradient';
-import {THEME} from '../../theme';
+
+import {useSelector} from 'react-redux';
 
 interface ShoppingCartProps {
   onPress?: () => void;
@@ -12,22 +14,14 @@ interface ShoppingCartProps {
 }
 
 const ShoppingCart: React.FC<ShoppingCartProps> = ({onPress, disabled}) => {
-  const [quantity, setQuantity] = React.useState(2);
-
-  const handleIncrement = () => {
-    setQuantity(quantity + 1);
-  };
-
-  const handleDecrement = () => {
-    setQuantity(quantity - 1);
-  };
+  const {value} = useSelector((state: any) => state.listValue);
 
   return (
     <Container onPress={onPress} disabled={disabled}>
       <Basket source={Cart} />
-      {quantity ? (
+      {value.length ? (
         <BasketQuantity>
-          <BasketQuantityText>{quantity}</BasketQuantityText>
+          <BasketQuantityText>{value.length}</BasketQuantityText>
         </BasketQuantity>
       ) : null}
       <LinearGradient

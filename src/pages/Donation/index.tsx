@@ -27,12 +27,13 @@ import {THEME} from '../../theme';
 import {BackButton} from '../../components/Buttons/BackButton';
 import {Button} from '../../components/Buttons/Button';
 import {ShoppingCart} from '../../components/ShoppingCart';
+import {FoodList} from '../../components/FoodList';
 
 import {useNavigation} from '@react-navigation/native';
 import {AppNavigationProps} from '../../routes';
 
-import {FoodList} from '../../components/FoodList';
 import api from '../../services/api/api';
+import {useSelector} from 'react-redux';
 
 interface CustomButtonProps extends TouchableOpacityProps {
   backgroundColor?: string;
@@ -94,6 +95,8 @@ const Donation: React.FC<CustomButtonProps> = ({
 
   const navigation = useNavigation<AppNavigationProps>();
 
+  const {value} = useSelector((state: any) => state.listValue);
+
   //   useEffect(() => {
   //     const fetchDonations = async () => {
   //       try {
@@ -126,12 +129,34 @@ const Donation: React.FC<CustomButtonProps> = ({
     setChoseOng(false);
   };
 
-  const handleButtonConfirm = () => {
-    setEndDonation(!endDonation);
-  };
-
   const handleFeedBack = () => {
     navigation.navigate('Home', {feedBack: true});
+  };
+
+  const renderItem = ({item, index}: {item: any; index: number}) => {
+    return <FoodList data={item} index={index} />;
+  };
+
+  const renderItemListDonation = ({
+    item,
+    index,
+  }: {
+    item: any;
+    index: number;
+  }) => {
+    return (
+      <DonationTotalCardContent>
+        <DonationTotalCardTitle>{item.name}</DonationTotalCardTitle>
+        <DonationTotalCardText>{item.peso}</DonationTotalCardText>
+        <DonationTotalCardCircle>
+          <DonationTotalCardCircleValue>{index}</DonationTotalCardCircleValue>
+        </DonationTotalCardCircle>
+      </DonationTotalCardContent>
+    );
+  };
+
+  const handleButtonConfirm = () => {
+    setEndDonation(!endDonation);
   };
 
   return (
@@ -149,11 +174,8 @@ const Donation: React.FC<CustomButtonProps> = ({
           <FlatList
             style={{marginTop: 20, width: '100%'}}
             data={donations}
-            //@ts-ignore
             keyExtractor={item => item.id}
-            renderItem={({item}) => (
-              <FoodList data={item} onQuantityChange={() => {}} />
-            )}
+            renderItem={renderItem}
             showsVerticalScrollIndicator={false}
           />
           <ButtonContent>
@@ -171,30 +193,15 @@ const Donation: React.FC<CustomButtonProps> = ({
             nestedScrollEnabled={true}>
             <DonationTotalCard>
               <View style={{height: 220, alignItems: 'center'}}>
-                <ScrollView
-                  contentContainerStyle={{
-                    flexGrow: 1,
-                    alignItems: 'center',
-                  }}
-                  indicatorStyle="white"
-                  nestedScrollEnabled={true}
-                  showsVerticalScrollIndicator={false}>
-                  {donations.map((item: any, index) => (
-                    <DonationTotalCardContent key={index}>
-                      <DonationTotalCardTitle key={index}>
-                        {item.name}
-                      </DonationTotalCardTitle>
-                      <DonationTotalCardText key={index}>
-                        {item.peso}
-                      </DonationTotalCardText>
-                      <DonationTotalCardCircle key={index}>
-                        <DonationTotalCardCircleValue key={index}>
-                          3
-                        </DonationTotalCardCircleValue>
-                      </DonationTotalCardCircle>
-                    </DonationTotalCardContent>
-                  ))}
-                </ScrollView>
+                <FlatList
+                  style={{marginTop: 20, width: '100%'}}
+                  contentContainerStyle={{alignItems: 'center'}}
+                  data={value}
+                  keyExtractor={(item): any => item.id}
+                  nestedScrollEnabled
+                  showsVerticalScrollIndicator={false}
+                  renderItem={renderItemListDonation}
+                />
               </View>
 
               <DonationTotalChosenCardContent>

@@ -14,6 +14,7 @@ import {Revenue} from '../pages/Revenue/Revenue';
 import {Voluntary} from '../pages/Voluntary';
 import {RevenueList} from '../pages/Revenue/RevenueList';
 import {RevenueExplorer} from '../pages/Revenue/RevenueExplorer';
+import {MapLocation} from '../pages/MapLocation';
 
 type AppRoutes = {
   Home: undefined | {feedBack: boolean};
@@ -27,6 +28,7 @@ type AppRoutes = {
   Voluntary: undefined;
   RevenueList: undefined;
   RevenueExplorer: undefined;
+  MapLocation: undefined | {showModal: boolean};
 };
 
 export type AppNavigationProps = NativeStackNavigationProp<AppRoutes>;
@@ -47,6 +49,7 @@ export function StackRoutes() {
       <stack.Screen name="Voluntary" component={Voluntary} />
       <stack.Screen name="RevenueList" component={RevenueList} />
       <stack.Screen name="RevenueExplorer" component={RevenueExplorer} />
+      <stack.Screen name="MapLocation" component={MapLocation} />
     </stack.Navigator>
   );
 }
