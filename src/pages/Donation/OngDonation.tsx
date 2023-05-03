@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {FlatList, ScrollView, TouchableOpacityProps, View} from 'react-native';
 
 import {
@@ -41,7 +41,7 @@ interface CustomButtonProps extends TouchableOpacityProps {
   quantity: number;
 }
 
-const Donation: React.FC<CustomButtonProps> = ({
+const OngDonation: React.FC<CustomButtonProps> = ({
   backgroundColor,
   textColor,
   quantity,
@@ -88,11 +88,6 @@ const Donation: React.FC<CustomButtonProps> = ({
   const [donations] = React.useState(foods);
   const [endDonation, setEndDonation] = React.useState(true);
 
-  const [button1Active, setButton1Active] = React.useState(false);
-  const [button2Active, setButton2Active] = React.useState(true);
-
-  const [choseOng, setChoseOng] = React.useState(true);
-
   const navigation = useNavigation<AppNavigationProps>();
 
   const {value} = useSelector((state: any) => state.listValue);
@@ -111,26 +106,14 @@ const Donation: React.FC<CustomButtonProps> = ({
 
   const handleBack = () => {
     if (endDonation) {
-      navigation.navigate('Home');
+      navigation.navigate('OngHome');
     } else {
       setEndDonation(!endDonation);
     }
   };
 
-  const handleButton1Press = () => {
-    setButton1Active(false);
-    setButton2Active(true);
-    setChoseOng(true);
-  };
-
-  const handleButton2Press = () => {
-    setButton2Active(false);
-    setButton1Active(true);
-    setChoseOng(false);
-  };
-
   const handleFeedBack = () => {
-    navigation.navigate('Home', {feedBack: true});
+    navigation.navigate('OngHome');
   };
 
   const renderItem = ({item, index}: {item: any; index: number}) => {
@@ -166,7 +149,7 @@ const Donation: React.FC<CustomButtonProps> = ({
         <ShoppingCart disabled />
       </Header>
       <DonationListContent>
-        <DonationListText>Lista de doações</DonationListText>
+        <DonationListText>Falta de estoque</DonationListText>
       </DonationListContent>
 
       {endDonation ? (
@@ -192,9 +175,9 @@ const Donation: React.FC<CustomButtonProps> = ({
             showsVerticalScrollIndicator={false}
             nestedScrollEnabled={true}>
             <DonationTotalCard>
-              <View style={{height: 220, alignItems: 'center'}}>
+              <View style={{height: '100%', alignItems: 'center'}}>
                 <FlatList
-                  style={{marginTop: 20, width: '100%'}}
+                  style={{marginTop: 10, marginBottom: 40, width: '100%'}}
                   contentContainerStyle={{alignItems: 'center'}}
                   data={value}
                   keyExtractor={(item): any => item.id}
@@ -203,43 +186,7 @@ const Donation: React.FC<CustomButtonProps> = ({
                   renderItem={renderItemListDonation}
                 />
               </View>
-
-              <DonationTotalChosenCardContent>
-                <DonationTotalChosenCard
-                  onPress={() => handleButton1Press()}
-                  background={
-                    button1Active ? THEME.colors.red : THEME.colors.white
-                  }>
-                  <DonationTotalChosenCardTitle
-                    textColor={
-                      button1Active ? THEME.colors.white : THEME.colors.red
-                    }>
-                    Você vai{'\n'}até a ONG
-                  </DonationTotalChosenCardTitle>
-                </DonationTotalChosenCard>
-                <DonationTotalChosenCard
-                  onPress={() => handleButton2Press()}
-                  background={
-                    button2Active ? THEME.colors.red : THEME.colors.white
-                  }>
-                  <DonationTotalChosenCardTitle
-                    textColor={
-                      button2Active ? THEME.colors.white : THEME.colors.red
-                    }>
-                    A ONG{'\n'}vai até você
-                  </DonationTotalChosenCardTitle>
-                </DonationTotalChosenCard>
-              </DonationTotalChosenCardContent>
             </DonationTotalCard>
-
-            {choseOng ? (
-              <CloseOngsContent
-                onPress={() =>
-                  navigation.navigate('MapLocation', {showModal: true})
-                }>
-                <ButtonOngTitle>ONGS mais{'\n'}próximas</ButtonOngTitle>
-              </CloseOngsContent>
-            ) : null}
 
             <ButtonContentDonation onPress={() => handleFeedBack()}>
               <ButtonTitle>Finalizar</ButtonTitle>
@@ -251,4 +198,4 @@ const Donation: React.FC<CustomButtonProps> = ({
   );
 };
 
-export {Donation};
+export {OngDonation};

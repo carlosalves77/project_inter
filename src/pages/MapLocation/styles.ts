@@ -55,9 +55,10 @@ export const OngContainer = styled.View`
 `;
 
 export const OngImg = styled.Image`
-  width: 78px;
-  height: 78px;
-  margin-top: 5px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50px;
+  margin-left: 5px;
 `;
 
 export const OngInfo = styled.View``;

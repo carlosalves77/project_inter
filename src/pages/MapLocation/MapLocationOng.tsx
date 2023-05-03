@@ -39,10 +39,6 @@ import {THEME} from '../../theme';
 import Geolocation from '@react-native-community/geolocation';
 import {BackButton} from '../../components/Buttons/BackButton';
 
-import outStockOng from '../../../assets/outStockOng.png';
-import NovaEsperanca from '../../../assets/NovaEsperanca.png';
-import AmigodaVez from '../../../assets/AmigodaVez.png';
-
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {AppNavigationProps} from '../../routes';
 
@@ -50,7 +46,7 @@ interface MyParams {
   showModal: boolean;
 }
 
-const MapLocation: React.FC = () => {
+const MapLocationOng: React.FC = () => {
   const route = useRoute();
   const myFeedBack = (route.params as MyParams)?.showModal;
   const [showModal, setShowModal] = React.useState(myFeedBack);
@@ -109,21 +105,21 @@ const MapLocation: React.FC = () => {
 
   const OngList = [
     {
-      name: 'Família Solidária',
-      foto: outStockOng,
-      subnome: 'Prefeitura de Mogi das Cruzes',
+      name: 'Gabriel Monteiro',
+      foto: 'https://i.ibb.co/TmtRqkJ/Macarr-o.png',
+      subnome: 'Macarrão 500g, Feijão 1kg...',
       distance: '1,5 km',
     },
     {
-      name: 'Amigo da vez',
-      foto: AmigodaVez,
-      subnome: 'Organização pela vida e saúde',
+      name: 'Matheus Reis',
+      foto: 'https://i.ibb.co/9r1gq4z/Arroz.png',
+      subnome: 'Arroz 1kg, Leite 1L, Feijão 1kg...',
       distance: '2,5 km',
     },
     {
-      name: 'Nova esperança',
-      foto: NovaEsperanca,
-      subnome: 'Associção Missão Resgate',
+      name: 'Clerisson Lins',
+      foto: 'https://i.ibb.co/hyL9NWQ/Feij-o.png',
+      subnome: 'Feijão 1kg, Arroz 1kg, Macarrão 500g...',
       distance: '3,5 km',
     },
   ];
@@ -193,7 +189,7 @@ const MapLocation: React.FC = () => {
 
   const handleGoBack = () => {
     setShowModal(false);
-    navigation.navigate('Home');
+    navigation.navigate('OngHome');
   };
 
   return (
@@ -241,13 +237,17 @@ const MapLocation: React.FC = () => {
           <IconContainer {...panResponder.panHandlers}>
             <IconContent />
           </IconContainer>
-          <OngTitle>ONGs mais próximas</OngTitle>
+          <OngTitle>Doadores mais próximos</OngTitle>
           {OngList.map(item => (
             <OngContainer>
-              <OngImg source={item.foto} />
+              <OngImg source={{uri: item.foto}} />
               <OngInfo>
                 <OngTitleContent>{item.name}</OngTitleContent>
-                <OngInfoText>{item.subnome}</OngInfoText>
+                <OngInfoText>
+                  {item.subnome?.length > 28
+                    ? `${item.subnome?.slice(0, 28)}...`
+                    : item.subnome}
+                </OngInfoText>
               </OngInfo>
               <OngDistanceContent>
                 <OngDistanceText>{item.distance}</OngDistanceText>
@@ -288,4 +288,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export {MapLocation};
+export {MapLocationOng};

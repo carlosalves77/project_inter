@@ -3,7 +3,7 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 
-import {TouchableOpacityProps} from 'react-native';
+// Donation Path
 
 import {Home} from '../pages/Home';
 import {Login} from '../pages/Login';
@@ -15,8 +15,17 @@ import {Voluntary} from '../pages/Voluntary';
 import {RevenueList} from '../pages/Revenue/RevenueList';
 import {RevenueExplorer} from '../pages/Revenue/RevenueExplorer';
 import {MapLocation} from '../pages/MapLocation';
+import {ChosePath} from '../pages/ChosePath';
+
+// ONG Path
+
+import {OngHome} from '../pages/Home/OngHome';
+import {OngDonation} from '../pages/Donation/OngDonation';
+import {MapLocationOng} from '../pages/MapLocation/MapLocationOng';
 
 type AppRoutes = {
+  // Donation Path
+
   Home: undefined | {feedBack: boolean};
   Login: undefined;
   profile: undefined;
@@ -27,8 +36,15 @@ type AppRoutes = {
   Revenue: undefined;
   Voluntary: undefined;
   RevenueList: undefined;
+  ChosePath: undefined;
   RevenueExplorer: undefined;
   MapLocation: undefined | {showModal: boolean};
+
+  // ONG Path
+
+  OngHome: undefined | {feedBack: boolean};
+  OngDonation: undefined;
+  MapLocationOng: undefined | {showModal: boolean};
 };
 
 export type AppNavigationProps = NativeStackNavigationProp<AppRoutes>;
@@ -50,6 +66,11 @@ export function StackRoutes() {
       <stack.Screen name="RevenueList" component={RevenueList} />
       <stack.Screen name="RevenueExplorer" component={RevenueExplorer} />
       <stack.Screen name="MapLocation" component={MapLocation} />
+      <stack.Screen name="ChosePath" component={ChosePath} />
+
+      <stack.Screen name="OngHome" component={OngHome} />
+      <stack.Screen name="OngDonation" component={OngDonation} />
+      <stack.Screen name="MapLocationOng" component={MapLocationOng} />
     </stack.Navigator>
   );
 }

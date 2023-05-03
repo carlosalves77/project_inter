@@ -38,12 +38,14 @@ export const DonationListContent = styled.View`
   border-radius: 37px;
   align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
 `;
 
 export const DonationListText = styled.Text`
   font-family: ${THEME.fonts.extraBold};
   font-size: ${RFValue(18)}px;
   color: ${THEME.colors.white};
+  text-align: center;
 `;
 
 export const DonationList = styled.View`
@@ -63,6 +65,7 @@ export const DonationTotalCard = styled.View`
   align-items: center;
   margin-top: 54px;
   padding-top: 45px;
+  justify-content: center;
 `;
 
 export const DonationTotalCardContent = styled.View`

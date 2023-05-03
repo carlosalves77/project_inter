@@ -95,7 +95,7 @@ const Login: React.FC = () => {
     try {
       setTimeout(() => {
         if (user === 'carlos' && password === '123') {
-          return navigation.navigate('Home');
+          return navigation.navigate('ChosePath');
         } else {
           handleToastFail();
           setIsLoading(false);

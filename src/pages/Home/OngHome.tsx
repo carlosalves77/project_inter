@@ -26,20 +26,17 @@ import Icon from 'react-native-vector-icons/Feather';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {AppNavigationProps} from '../../routes';
 
-import {ShoppingCart} from '../../components/ShoppingCart';
-
 import OutStock from '../../../assets/OutStock.png';
 import Revenue from '../../../assets/Revenue.png';
-import voluntary from '../../../assets/Voluntary.png';
 
-import {FeedBackModal} from '../../components/FeedBack';
 import {MapLocation} from '../MapLocation';
+import {FeedBackOng} from '../../components/FeedBack/FeedBackOng';
 
 interface MyParams {
   feedBack: boolean;
 }
 
-const Home: React.FC = () => {
+const OngHome: React.FC = () => {
   const navigation = useNavigation<AppNavigationProps>();
   const route = useRoute();
 
@@ -50,27 +47,19 @@ const Home: React.FC = () => {
   };
 
   const handleDonation = () => {
-    navigation.navigate('Donation');
+    navigation.navigate('OngDonation');
   };
 
   const handleRevenue = () => {
     navigation.navigate('Revenue');
   };
 
-  const handleVoluntary = () => {
-    navigation.navigate('Voluntary');
-  };
-
-  const handleOutStock = () => {
-    navigation.navigate('OutStock');
-  };
-
   const handleCloseFeedBack = () => {
-    navigation.navigate('Home', {feedBack: false});
+    navigation.navigate('OngHome', {feedBack: false});
   };
 
   const handleMaps = () => {
-    navigation.navigate('MapLocation', {showModal: true});
+    navigation.navigate('MapLocationOng', {showModal: true});
   };
 
   return (
@@ -83,29 +72,21 @@ const Home: React.FC = () => {
           </LogoutButton>
           <TextAndShoppingCart>
             <TextContent>
-              <Title>Seja bem-vindo,</Title>
-              <Name>Gabriel Monteiro</Name>
+              <Title>Seja bem-vindo, ONG</Title>
+              <Name>Nova Esperança</Name>
             </TextContent>
-            <ShoppingCart
-              onPress={() => {
-                handleDonation();
-              }}
-            />
           </TextAndShoppingCart>
           <MapContainer activeOpacity={1} onPress={() => handleMaps()}>
             <MapLocation />
             <MapContent>
               <MapTextContent>
-                <MapTitle>Encontre a ONG mais próxima</MapTitle>
+                <MapTitle>Encontre os doadores mais próximos</MapTitle>
               </MapTextContent>
             </MapContent>
           </MapContainer>
           <CardOptions>
-            <Card onPress={() => handleOutStock()}>
+            <Card onPress={() => handleDonation()}>
               <CardImage source={OutStock} />
-            </Card>
-            <Card onPress={() => handleVoluntary()}>
-              <CardImage source={voluntary} />
             </Card>
             <Card onPress={() => handleRevenue()}>
               <CardImage source={Revenue} />
@@ -114,13 +95,13 @@ const Home: React.FC = () => {
         </Content>
       </ScrollView>
       <BottomViewStyle>
-        <BottomViewStyleText>Compartilhe sua Ação</BottomViewStyleText>
+        <BottomViewStyleText>Compartilhe fotos</BottomViewStyleText>
       </BottomViewStyle>
       {myFeedBack ? (
-        <FeedBackModal onClose={() => handleCloseFeedBack()} />
+        <FeedBackOng onClose={() => handleCloseFeedBack()} />
       ) : null}
     </Container>
   );
 };
 
-export {Home};
+export {OngHome};

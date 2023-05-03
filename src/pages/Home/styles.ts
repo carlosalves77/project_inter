@@ -121,12 +121,13 @@ export const MapTitle = styled.Text`
   font-size: ${RFValue(18)}px;
   color: ${THEME.colors.white};
   align-self: center;
+  text-align: center;
 `;
 
 export const CardOptions = styled.View`
   flex-direction: row;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-bottom: 29px;
 `;
 
