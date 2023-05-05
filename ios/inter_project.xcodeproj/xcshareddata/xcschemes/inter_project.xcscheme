@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "inter_project.app"
-               BlueprintName = "inter_project"
-               ReferencedContainer = "container:inter_project.xcodeproj">
+               BuildableName = "ProjetoInter.app"
+               BlueprintName = "ProjetoInter"
+               ReferencedContainer = "container:ProjetoInter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "inter_projectTests.xctest"
-               BlueprintName = "inter_projectTests"
-               ReferencedContainer = "container:inter_project.xcodeproj">
+               BuildableName = "ProjetoInterTests.xctest"
+               BlueprintName = "ProjetoInterTests"
+               ReferencedContainer = "container:ProjetoInter.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "inter_project.app"
-            BlueprintName = "inter_project"
-            ReferencedContainer = "container:inter_project.xcodeproj">
+            BuildableName = "ProjetoInter.app"
+            BlueprintName = "ProjetoInter"
+            ReferencedContainer = "container:ProjetoInter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "inter_project.app"
-            BlueprintName = "inter_project"
-            ReferencedContainer = "container:inter_project.xcodeproj">
+            BuildableName = "ProjetoInter.app"
+            BlueprintName = "ProjetoInter"
+            ReferencedContainer = "container:ProjetoInter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
