@@ -9,12 +9,17 @@ interface ButtonProps extends TouchableOpacityProps {
   name: string;
   onPress?: () => void;
   isLoading?: boolean;
-  size?: boolean;
+  disabled?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({onPress, name, isLoading, size}) => {
+const Button: React.FC<ButtonProps> = ({
+  onPress,
+  name,
+  isLoading,
+  disabled,
+}) => {
   return (
-    <Container onPress={onPress}>
+    <Container onPress={onPress} disabled={disabled}>
       {isLoading ? (
         <ActivityIndicator size="large" color="#fff" />
       ) : (

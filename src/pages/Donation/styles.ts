@@ -65,7 +65,6 @@ export const DonationTotalCard = styled.View`
   align-items: center;
   margin-top: 54px;
   padding-top: 45px;
-  justify-content: center;
 `;
 
 export const DonationTotalCardContent = styled.View`

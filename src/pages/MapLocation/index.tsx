@@ -27,13 +27,12 @@ import {
   OngInfo,
   OngDistanceContent,
   OngDistanceText,
+  ContentMarker,
+  Balon,
+  ImgOng,
 } from './styles';
 
-import MapView, {
-  Marker,
-  PROVIDER_GOOGLE,
-  enableLatestRenderer,
-} from 'react-native-maps';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {THEME} from '../../theme';
 
 import Geolocation from '@react-native-community/geolocation';
@@ -45,6 +44,8 @@ import AmigodaVez from '../../../assets/AmigodaVez.png';
 
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {AppNavigationProps} from '../../routes';
+
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 interface MyParams {
   showModal: boolean;
@@ -64,7 +65,6 @@ const MapLocation: React.FC = () => {
       }
     | undefined
   >(undefined);
-  const [marker, setMarker] = React.useState([]);
 
   const navigation = useNavigation<AppNavigationProps>();
 
@@ -85,26 +85,6 @@ const MapLocation: React.FC = () => {
       error => console.log(error),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
     );
-  };
-
-  const newMarker = (e: any) => {
-    let dados = {
-      key: marker.length,
-      coords: {
-        latitude: e.nativeEvent.coordinate.latitude,
-        longitude: e.nativeEvent.coordinate.longitude,
-      },
-      pinColor: '#FF0000',
-    };
-
-    setRegion({
-      latitude: e.nativeEvent.coordinate.latitude,
-      longitude: e.nativeEvent.coordinate.longitude,
-      latitudeDelta: 0.015,
-      longitudeDelta: 0.0121,
-    });
-
-    setMarker((oldArray): any => [...oldArray, dados]);
   };
 
   const OngList = [
@@ -189,8 +169,6 @@ const MapLocation: React.FC = () => {
     ],
   };
 
-  //   enableLatestRenderer();
-
   const handleGoBack = () => {
     setShowModal(false);
     navigation.navigate('Home');
@@ -204,6 +182,12 @@ const MapLocation: React.FC = () => {
         </Button>
       ) : null}
       <MapView
+        initialRegion={{
+          latitude: -8.053770345997485,
+          longitude: -34.893403117188974,
+          latitudeDelta: 0.2,
+          longitudeDelta: 0.2,
+        }}
         onMapReady={() => {
           Platform.OS === 'android'
             ? PermissionsAndroid.request(
@@ -224,17 +208,45 @@ const MapLocation: React.FC = () => {
         region={region}
         zoomEnabled={true}
         showsUserLocation={true}
-        loadingEnabled={true}
-        onPress={e => newMarker(e)}>
-        {marker.map((marker: any, index) => {
-          return (
-            <Marker
-              key={marker.key}
-              coordinate={marker.coords}
-              pinColor={marker.pinColor}
-            />
-          );
-        })}
+        loadingEnabled={true}>
+        <Marker
+          coordinate={{
+            latitude: -8.053023149984211,
+            longitude: -34.890650834686696,
+          }}>
+          <ContentMarker>
+            <Balon>
+              <ImgOng source={outStockOng} />
+              <Icon name="caret-down" size={18} color="red" />
+            </Balon>
+          </ContentMarker>
+        </Marker>
+
+        <Marker
+          coordinate={{
+            latitude: -8.05762042573195,
+            longitude: -34.88924190239979,
+          }}>
+          <ContentMarker>
+            <Balon>
+              <ImgOng source={AmigodaVez} />
+              <Icon name="caret-down" size={18} color="red" />
+            </Balon>
+          </ContentMarker>
+        </Marker>
+
+        <Marker
+          coordinate={{
+            latitude: -8.049872133053935,
+            longitude: -34.89715306555255,
+          }}>
+          <ContentMarker>
+            <Balon>
+              <ImgOng source={NovaEsperanca} />
+              <Icon name="caret-down" size={18} color="red" />
+            </Balon>
+          </ContentMarker>
+        </Marker>
       </MapView>
       {showModal ? (
         <Animated.View style={[styles.bottomSheet, bottomSheetAnimation]}>

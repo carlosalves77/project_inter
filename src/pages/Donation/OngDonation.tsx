@@ -16,11 +16,6 @@ import {
   DonationTotalCardContent,
   DonationTotalCardCircle,
   DonationTotalCardCircleValue,
-  DonationTotalChosenCardContent,
-  DonationTotalChosenCard,
-  DonationTotalChosenCardTitle,
-  CloseOngsContent,
-  ButtonOngTitle,
 } from './styles';
 import {THEME} from '../../theme';
 
@@ -34,6 +29,7 @@ import {AppNavigationProps} from '../../routes';
 
 import api from '../../services/api/api';
 import {useSelector} from 'react-redux';
+import Toast from 'react-native-toast-message';
 
 interface CustomButtonProps extends TouchableOpacityProps {
   backgroundColor?: string;
@@ -87,6 +83,7 @@ const OngDonation: React.FC<CustomButtonProps> = ({
   ];
   const [donations] = React.useState(foods);
   const [endDonation, setEndDonation] = React.useState(true);
+  const [buttonDisabled, setButtonDisabled] = React.useState(false);
 
   const navigation = useNavigation<AppNavigationProps>();
 
@@ -139,7 +136,19 @@ const OngDonation: React.FC<CustomButtonProps> = ({
   };
 
   const handleButtonConfirm = () => {
-    setEndDonation(!endDonation);
+    if (value.length === 0) {
+      setButtonDisabled(true);
+      setTimeout(() => {
+        setButtonDisabled(false);
+      }, 2000);
+
+      Toast.show({
+        type: 'error',
+        text1: 'Adicione algum item!',
+      });
+    } else {
+      setEndDonation(!endDonation);
+    }
   };
 
   return (
@@ -166,6 +175,7 @@ const OngDonation: React.FC<CustomButtonProps> = ({
               name="Continuar"
               isLoading={false}
               onPress={() => handleButtonConfirm()}
+              disabled={buttonDisabled}
             />
           </ButtonContent>
         </Content>
@@ -194,6 +204,7 @@ const OngDonation: React.FC<CustomButtonProps> = ({
           </ScrollView>
         </Content>
       )}
+      <Toast position="top" />
     </Container>
   );
 };

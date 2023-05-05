@@ -90,3 +90,25 @@ export const OngDistanceText = styled.Text`
   font-size: ${RFValue(12)}px;
   font-family: ${THEME.fonts.regular};
 `;
+
+export const ContentMarker = styled.View`
+  height: 100px;
+  width: 70px;
+`;
+
+export const Balon = styled.View`
+  height: 70px;
+  width: 70px;
+  align-items: center;
+`;
+
+export const ImgOng = styled.Image`
+  width: 44px;
+  height: 44px;
+`;
+
+export const ImgUser = styled.Image`
+  width: 44px;
+  height: 44px;
+  border-radius: 50px;
+`;

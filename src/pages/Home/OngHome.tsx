@@ -29,7 +29,7 @@ import {AppNavigationProps} from '../../routes';
 import OutStock from '../../../assets/OutStock.png';
 import Revenue from '../../../assets/Revenue.png';
 
-import {MapLocation} from '../MapLocation';
+import {MapLocationOng} from '../MapLocation/MapLocationOng';
 import {FeedBackOng} from '../../components/FeedBack/FeedBackOng';
 
 interface MyParams {
@@ -77,7 +77,7 @@ const OngHome: React.FC = () => {
             </TextContent>
           </TextAndShoppingCart>
           <MapContainer activeOpacity={1} onPress={() => handleMaps()}>
-            <MapLocation />
+            <MapLocationOng />
             <MapContent>
               <MapTextContent>
                 <MapTitle>Encontre os doadores mais próximos</MapTitle>

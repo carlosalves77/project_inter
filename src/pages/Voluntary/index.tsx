@@ -123,7 +123,10 @@ const Voluntary: React.FC = () => {
         )}
 
         <ButtonContent>
-          <Button name="Confirmar" />
+          <Button
+            name="Confirmar"
+            onPress={() => navigation.navigate('Home')}
+          />
         </ButtonContent>
       </ScrollView>
     </Container>

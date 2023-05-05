@@ -1,5 +1,11 @@
-import React, {useEffect} from 'react';
-import {FlatList, ScrollView, TouchableOpacityProps, View} from 'react-native';
+import React from 'react';
+import {
+  FlatList,
+  ScrollView,
+  TouchableOpacityProps,
+  View,
+  ListRenderItemInfo,
+} from 'react-native';
 
 import {
   Container,
@@ -34,6 +40,7 @@ import {AppNavigationProps} from '../../routes';
 
 import api from '../../services/api/api';
 import {useSelector} from 'react-redux';
+import Toast from 'react-native-toast-message';
 
 interface CustomButtonProps extends TouchableOpacityProps {
   backgroundColor?: string;
@@ -86,7 +93,9 @@ const Donation: React.FC<CustomButtonProps> = ({
     },
   ];
   const [donations] = React.useState(foods);
+
   const [endDonation, setEndDonation] = React.useState(true);
+  const [buttonDisabled, setButtonDisabled] = React.useState(false);
 
   const [button1Active, setButton1Active] = React.useState(false);
   const [button2Active, setButton2Active] = React.useState(true);
@@ -97,17 +106,7 @@ const Donation: React.FC<CustomButtonProps> = ({
 
   const {value} = useSelector((state: any) => state.listValue);
 
-  //   useEffect(() => {
-  //     const fetchDonations = async () => {
-  //       try {
-  //         const response = await api.get('/foods');
-  //         const data = response.data;
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-  //     fetchDonations();
-  //   }, []);
+  console.log(value);
 
   const handleBack = () => {
     if (endDonation) {
@@ -137,26 +136,34 @@ const Donation: React.FC<CustomButtonProps> = ({
     return <FoodList data={item} index={index} />;
   };
 
-  const renderItemListDonation = ({
-    item,
-    index,
-  }: {
-    item: any;
-    index: number;
-  }) => {
+  const renderItemListDonation = ({item, index}: ListRenderItemInfo<item>) => {
     return (
       <DonationTotalCardContent>
         <DonationTotalCardTitle>{item.name}</DonationTotalCardTitle>
         <DonationTotalCardText>{item.peso}</DonationTotalCardText>
         <DonationTotalCardCircle>
-          <DonationTotalCardCircleValue>{index}</DonationTotalCardCircleValue>
+          <DonationTotalCardCircleValue>
+            {item.name}
+          </DonationTotalCardCircleValue>
         </DonationTotalCardCircle>
       </DonationTotalCardContent>
     );
   };
 
   const handleButtonConfirm = () => {
-    setEndDonation(!endDonation);
+    if (value.length === 0) {
+      setButtonDisabled(true);
+      setTimeout(() => {
+        setButtonDisabled(false);
+      }, 2000);
+
+      Toast.show({
+        type: 'error',
+        text1: 'Adicione algum item!',
+      });
+    } else {
+      setEndDonation(!endDonation);
+    }
   };
 
   return (
@@ -183,6 +190,7 @@ const Donation: React.FC<CustomButtonProps> = ({
               name="Continuar"
               isLoading={false}
               onPress={() => handleButtonConfirm()}
+              disabled={buttonDisabled}
             />
           </ButtonContent>
         </Content>
@@ -192,7 +200,7 @@ const Donation: React.FC<CustomButtonProps> = ({
             showsVerticalScrollIndicator={false}
             nestedScrollEnabled={true}>
             <DonationTotalCard>
-              <View style={{height: 220, alignItems: 'center'}}>
+              <View style={{height: 220}}>
                 <FlatList
                   style={{marginTop: 20, width: '100%'}}
                   contentContainerStyle={{alignItems: 'center'}}
@@ -247,6 +255,7 @@ const Donation: React.FC<CustomButtonProps> = ({
           </ScrollView>
         </Content>
       )}
+      <Toast position="top" />
     </Container>
   );
 };

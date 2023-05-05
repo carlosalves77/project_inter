@@ -49,6 +49,11 @@ type FormData = {
   password: string;
 };
 
+interface UserCredentials {
+  user: string;
+  password: string;
+}
+
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 
@@ -57,6 +62,15 @@ const Login: React.FC = () => {
   const [password, setPassword] = React.useState('');
   const [showPassword, setShowPassword] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+
+  const credentials: UserCredentials[] = [
+    {user: 'carlos', password: '123'},
+    {user: 'gabriel', password: 'abc123'},
+    {user: 'clerisson', password: 'password123'},
+    {user: 'aline', password: 'qwerty'},
+    {user: 'matheus', password: 'letmein'},
+    {user: 'andre', password: 'secret'},
+  ];
 
   const [modalLogin, setModalLogin] = React.useState(true);
 
@@ -88,24 +102,23 @@ const Login: React.FC = () => {
       type: 'error',
       text1: 'Login ou senha inválido!',
     });
-    console.log('Toast');
   };
 
-  const handleLogin = async ({user, password}: FormData) => {
-    try {
-      setTimeout(() => {
-        if (user === 'carlos' && password === '123') {
+  const handleLogin = ({user, password}: FormData) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      credentials.forEach(credential => {
+        if (user === credential.user && password === credential.password) {
           return navigation.navigate('ChosePath');
         } else {
           handleToastFail();
           setIsLoading(false);
         }
-      }, 2000);
-    } catch (error) {
-      console.log(error);
-    } finally {
+      });
+    }, 2000);
+    setTimeout(() => {
       setIsLoading(false);
-    }
+    }, 4000);
   };
 
   const handleSignUp = () => {
@@ -158,6 +171,7 @@ const Login: React.FC = () => {
               autoCorrect={false}
               value={user}
               underlineColorAndroid="transparent"
+              autoCapitalize="none"
             />
             <PasswordContent>
               <UserTextInput
