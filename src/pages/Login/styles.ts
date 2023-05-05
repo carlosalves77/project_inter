@@ -60,6 +60,7 @@ export const UserTextInput = styled.TextInput`
   padding: 0 16px;
   margin-top: 10px;
   margin-bottom: 8px;
+  text-transform: lowercase;
 
   font-family: ${THEME.fonts.extraBold};
   font-size: ${RFValue(20)}px;

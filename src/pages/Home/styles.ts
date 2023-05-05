@@ -132,11 +132,11 @@ export const CardOptions = styled.View`
 `;
 
 export const Card = styled.TouchableOpacity`
-  width: 96px;
-  height: 81px;
+  width: 86px;
+  height: 71px;
 `;
 
 export const CardImage = styled.Image`
-  width: 96px;
-  height: 81px;
+  width: 86px;
+  height: 71px;
 `;

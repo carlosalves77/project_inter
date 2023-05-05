@@ -47,6 +47,13 @@ interface CustomButtonProps extends TouchableOpacityProps {
   textColor?: string;
   quantity: number;
 }
+interface Person {
+  name: string;
+}
+
+interface State {
+  listValue: {value: Person[]};
+}
 
 const Donation: React.FC<CustomButtonProps> = ({
   backgroundColor,
@@ -106,7 +113,24 @@ const Donation: React.FC<CustomButtonProps> = ({
 
   const {value} = useSelector((state: any) => state.listValue);
 
-  console.log(value);
+  const uniqueNames: {[name: string]: boolean} = {};
+  const uniquePeople: Person[] = [];
+
+  //@ts-ignore
+  value.forEach(person => {
+    if (!uniqueNames[person.name]) {
+      uniqueNames[person.name] = true;
+      uniquePeople.push(person);
+    }
+  });
+
+  const nameCounts = new Map<string, number>();
+
+  //@ts-ignore
+  value.forEach(person => {
+    const count = nameCounts.get(person.name) || 0;
+    nameCounts.set(person.name, count + 1);
+  });
 
   const handleBack = () => {
     if (endDonation) {
@@ -136,6 +160,7 @@ const Donation: React.FC<CustomButtonProps> = ({
     return <FoodList data={item} index={index} />;
   };
 
+  //@ts-ignore
   const renderItemListDonation = ({item, index}: ListRenderItemInfo<item>) => {
     return (
       <DonationTotalCardContent>
@@ -143,7 +168,7 @@ const Donation: React.FC<CustomButtonProps> = ({
         <DonationTotalCardText>{item.peso}</DonationTotalCardText>
         <DonationTotalCardCircle>
           <DonationTotalCardCircleValue>
-            {item.name}
+            {nameCounts.get(item.name)}
           </DonationTotalCardCircleValue>
         </DonationTotalCardCircle>
       </DonationTotalCardContent>
@@ -204,7 +229,8 @@ const Donation: React.FC<CustomButtonProps> = ({
                 <FlatList
                   style={{marginTop: 20, width: '100%'}}
                   contentContainerStyle={{alignItems: 'center'}}
-                  data={value}
+                  data={uniquePeople}
+                  //@ts-ignore
                   keyExtractor={(item): any => item.id}
                   nestedScrollEnabled
                   showsVerticalScrollIndicator={false}
