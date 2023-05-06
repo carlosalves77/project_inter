@@ -3,16 +3,42 @@ import styled from 'styled-components/native';
 import {THEME} from '../../theme';
 
 import {RFValue} from 'react-native-responsive-fontsize';
-import {TouchableOpacity} from 'react-native';
+import {Platform, TouchableOpacity} from 'react-native';
+
+export const Container = styled.View`
+  flex: 1;
+  background-color: ${THEME.colors.background};
+  padding-top: ${Platform.OS === 'android' ? 25 : 0}px;
+  padding-left: 24px;
+  padding-right: 24px;
+  align-items: center;
+`;
+
+export const Header = styled.View`
+  background-color: ${THEME.colors.red};
+  align-items: center;
+  justify-content: center;
+  border-radius: 47px;
+  padding: 8px;
+  width: 50%;
+`;
+
+export const HeaderTitle = styled.Text`
+  font-size: ${RFValue(16)}px;
+  font-family: ${THEME.fonts.extraBold};
+  color: ${THEME.colors.white};
+  text-align: center;
+`;
 
 export const MainContent = styled.View`
   width: 100%;
   margin-bottom: 28%;
+  margin-top: 40px;
 `;
 
 export const OnOpenContainer = styled.View`
   width: 100%;
-  height: 552px;
+  height: 450px;
   align-items: center;
   border-radius: 45px;
   border: 10px solid ${THEME.colors.red};
@@ -44,8 +70,8 @@ export const ImageContent = styled.View`
 `;
 
 export const Image = styled.Image`
-  width: 78px;
-  height: 78px;
+  width: 68px;
+  height: 68px;
   border-radius: 50px;
 `;
 
@@ -83,6 +109,6 @@ export const DonateButton = styled.TouchableOpacity`
 
 export const DonateText = styled.Text`
   font-size: ${RFValue(18)}px;
-  font-family: ${THEME.fonts.extraBold};
+  font-family: ${THEME.fonts.regular};
   color: ${THEME.colors.white};
 `;

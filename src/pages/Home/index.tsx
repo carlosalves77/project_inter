@@ -35,6 +35,9 @@ import voluntary from '../../../assets/Voluntary.png';
 import {FeedBackModal} from '../../components/FeedBack';
 import {MapLocation} from '../MapLocation';
 
+import {useSelector} from 'react-redux';
+import {selectValue} from '../../redux/useUserName';
+
 interface MyParams {
   feedBack: boolean;
 }
@@ -44,6 +47,8 @@ const Home: React.FC = () => {
   const route = useRoute();
 
   const myFeedBack = (route.params as MyParams)?.feedBack;
+
+  const name = useSelector(selectValue);
 
   const handleLogout = () => {
     navigation.navigate('Login');
@@ -84,7 +89,7 @@ const Home: React.FC = () => {
           <TextAndShoppingCart>
             <TextContent>
               <Title>Seja bem-vindo,</Title>
-              <Name>Gabriel Monteiro</Name>
+              <Name>{name}</Name>
             </TextContent>
             <ShoppingCart
               onPress={() => {

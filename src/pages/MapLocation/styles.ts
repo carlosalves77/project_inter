@@ -43,7 +43,7 @@ export const OngTitle = styled.Text`
   margin-bottom: 15px;
 `;
 
-export const OngContainer = styled.View`
+export const OngContainer = styled.TouchableOpacity`
   width: 90%;
   height: 78px;
   align-items: center;

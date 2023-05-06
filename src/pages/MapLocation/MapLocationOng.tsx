@@ -89,18 +89,21 @@ const MapLocationOng: React.FC = () => {
       foto: 'https://i.ibb.co/TmtRqkJ/Macarr-o.png',
       subnome: 'Macarrão 500g, Feijão 1kg...',
       distance: '1,5 km',
+      nameIndex: 'gabriel',
     },
     {
       name: 'Matheus Reis',
       foto: 'https://i.ibb.co/9r1gq4z/Arroz.png',
       subnome: 'Arroz 1kg, Leite 1L, Feijão 1kg...',
       distance: '2,5 km',
+      nameIndex: 'matheus',
     },
     {
       name: 'Clerisson Lins',
       foto: 'https://i.ibb.co/hyL9NWQ/Feij-o.png',
       subnome: 'Feijão 1kg, Arroz 1kg, Macarrão 500g...',
       distance: '3,5 km',
+      nameIndex: 'clerisson',
     },
   ];
 
@@ -168,6 +171,10 @@ const MapLocationOng: React.FC = () => {
   const handleGoBack = () => {
     setShowModal(false);
     navigation.navigate('OngHome');
+  };
+
+  const handleDonationClose = (name: string) => {
+    navigation.navigate('DonationCloses', {Name: name});
   };
 
   return (
@@ -253,7 +260,7 @@ const MapLocationOng: React.FC = () => {
           </IconContainer>
           <OngTitle>Doadores mais próximos</OngTitle>
           {OngList.map(item => (
-            <OngContainer>
+            <OngContainer onPress={() => handleDonationClose(item.nameIndex)}>
               <OngImg source={{uri: item.foto}} />
               <OngInfo>
                 <OngTitleContent>{item.name}</OngTitleContent>

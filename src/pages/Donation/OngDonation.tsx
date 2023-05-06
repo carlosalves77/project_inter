@@ -17,7 +17,6 @@ import {
   DonationTotalCardCircle,
   DonationTotalCardCircleValue,
 } from './styles';
-import {THEME} from '../../theme';
 
 import {BackButton} from '../../components/Buttons/BackButton';
 import {Button} from '../../components/Buttons/Button';
@@ -27,9 +26,16 @@ import {FoodList} from '../../components/FoodList';
 import {useNavigation} from '@react-navigation/native';
 import {AppNavigationProps} from '../../routes';
 
-import api from '../../services/api/api';
 import {useSelector} from 'react-redux';
 import Toast from 'react-native-toast-message';
+
+interface Person {
+  name: string;
+}
+
+interface State {
+  listValue: {value: Person[]};
+}
 
 interface CustomButtonProps extends TouchableOpacityProps {
   backgroundColor?: string;
@@ -89,17 +95,24 @@ const OngDonation: React.FC<CustomButtonProps> = ({
 
   const {value} = useSelector((state: any) => state.listValue);
 
-  //   useEffect(() => {
-  //     const fetchDonations = async () => {
-  //       try {
-  //         const response = await api.get('/foods');
-  //         const data = response.data;
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-  //     fetchDonations();
-  //   }, []);
+  const uniqueNames: {[name: string]: boolean} = {};
+  const uniquePeople: Person[] = [];
+
+  //@ts-ignore
+  value.forEach(person => {
+    if (!uniqueNames[person.name]) {
+      uniqueNames[person.name] = true;
+      uniquePeople.push(person);
+    }
+  });
+
+  const nameCounts = new Map<string, number>();
+
+  //@ts-ignore
+  value.forEach(person => {
+    const count = nameCounts.get(person.name) || 0;
+    nameCounts.set(person.name, count + 1);
+  });
 
   const handleBack = () => {
     if (endDonation) {
@@ -129,7 +142,9 @@ const OngDonation: React.FC<CustomButtonProps> = ({
         <DonationTotalCardTitle>{item.name}</DonationTotalCardTitle>
         <DonationTotalCardText>{item.peso}</DonationTotalCardText>
         <DonationTotalCardCircle>
-          <DonationTotalCardCircleValue>{index}</DonationTotalCardCircleValue>
+          <DonationTotalCardCircleValue>
+            {nameCounts.get(item.name)}
+          </DonationTotalCardCircleValue>
         </DonationTotalCardCircle>
       </DonationTotalCardContent>
     );
@@ -189,7 +204,8 @@ const OngDonation: React.FC<CustomButtonProps> = ({
                 <FlatList
                   style={{marginTop: 10, marginBottom: 40, width: '100%'}}
                   contentContainerStyle={{alignItems: 'center'}}
-                  data={value}
+                  data={uniquePeople}
+                  //@ts-ignore
                   keyExtractor={(item): any => item.id}
                   nestedScrollEnabled
                   showsVerticalScrollIndicator={false}

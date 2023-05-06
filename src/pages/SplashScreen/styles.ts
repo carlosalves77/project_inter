@@ -5,7 +5,7 @@ import {THEME} from '../../theme';
 
 const {width, height} = Dimensions.get('screen');
 
-export const Contaier = styled.View`
+export const Container = styled.View`
   height: ${height}px;
   width: ${width}px;
   background-color: ${THEME.colors.red};

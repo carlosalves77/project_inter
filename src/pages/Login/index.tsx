@@ -44,6 +44,9 @@ import welcomeFoodModal from '../../../assets/welcome-food.png';
 import Icon from 'react-native-vector-icons/Feather';
 import {THEME} from '../../theme';
 
+import {useDispatch} from 'react-redux';
+import {setValue} from '../../redux/useUserName';
+
 type FormData = {
   user: string;
   password: string;
@@ -64,12 +67,12 @@ const Login: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(false);
 
   const credentials: UserCredentials[] = [
-    {user: 'carlos', password: '123'},
-    {user: 'gabriel', password: 'abc123'},
-    {user: 'clerisson', password: 'password123'},
+    {user: 'carlos', password: 'ezpz7'},
+    {user: 'gabriel', password: 'biel99'},
+    {user: 'clerisson', password: 'lins20'},
     {user: 'aline', password: 'qwerty'},
-    {user: 'matheus', password: 'letmein'},
-    {user: 'andre', password: 'secret'},
+    {user: 'matheus', password: 'reis77'},
+    {user: 'andre', password: 'secret2'},
   ];
 
   const [modalLogin, setModalLogin] = React.useState(true);
@@ -77,6 +80,8 @@ const Login: React.FC = () => {
   const [modalY] = React.useState(new Animated.Value(-deviceHeight));
 
   const navigation = useNavigation<AppNavigationProps>();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {}, [
     Animated.timing(modalY, {
@@ -109,6 +114,32 @@ const Login: React.FC = () => {
     setTimeout(() => {
       credentials.forEach(credential => {
         if (user === credential.user && password === credential.password) {
+          let fullName: string;
+          switch (credential.user) {
+            case 'carlos':
+              fullName = 'Carlos Alves';
+              break;
+            case 'gabriel':
+              fullName = 'Gabriel Monteiro';
+              break;
+            case 'clerisson':
+              fullName = 'Clerisson Lins';
+              break;
+            case 'aline':
+              fullName = 'Aline Oliveira';
+              break;
+            case 'matheus':
+              fullName = 'Matheus Reis';
+              break;
+            case 'andre':
+              fullName = 'André Borba';
+              break;
+            default:
+              fullName = credential.user;
+          }
+
+          dispatch(setValue(fullName));
+
           return navigation.navigate('ChosePath');
         } else {
           handleToastFail();

@@ -23,7 +23,16 @@ import api from '../../services/api/api';
 import {useNavigation} from '@react-navigation/native';
 import {AppNavigationProps} from '../../routes';
 
-const OutStockList: React.FC = () => {
+interface IOutStockListDto {
+  id: string;
+  name: string;
+  foto: string;
+}
+interface OutStockListProps {
+  data: IOutStockListDto;
+}
+
+const OutStockList: React.FC<OutStockListProps> = ({data}) => {
   const [onOpen, setOnOpen] = React.useState(false);
 
   const navigation = useNavigation<AppNavigationProps>();
@@ -69,19 +78,6 @@ const OutStockList: React.FC = () => {
 
   const [outStockList] = React.useState(foods);
 
-  //   useEffect(() => {
-  //     const fetchOutStockList = async () => {
-  //       try {
-  //         const response = await api.get('/foods');
-  //         const data = response.data;
-  //         setOutStockList(data);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-  //     fetchOutStockList();
-  //   }, []);
-
   const handleOnOpen = () => {
     setOnOpen(!onOpen);
   };
@@ -94,10 +90,11 @@ const OutStockList: React.FC = () => {
     <MainContent>
       <Content onPress={() => handleOnOpen()}>
         <ImageContent>
-          <Image source={OutStock} />
+          {/* @ts-ignore */}
+          <Image source={data?.foto} />
         </ImageContent>
         <ContentTitle>
-          <Title>Família Solidária</Title>
+          <Title>{data.name}</Title>
           <SubTitle>Está com falta de estoque</SubTitle>
         </ContentTitle>
       </Content>

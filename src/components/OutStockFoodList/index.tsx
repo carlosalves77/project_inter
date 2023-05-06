@@ -39,7 +39,9 @@ const OutStockFoodList: React.FC<FoodDataProps> = ({data}) => {
         </FoodListInfoContent>
       </FoodListContent>
       <FoodQuantityValue>
-        <FoodQuantityValueText>1</FoodQuantityValueText>
+        <FoodQuantityValueText>
+          {Math.floor(Math.random() * 9) + 1}
+        </FoodQuantityValueText>
       </FoodQuantityValue>
     </Container>
   );
