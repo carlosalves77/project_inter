@@ -24,11 +24,11 @@ interface RevenueData {
   data: RevenueDTO;
 }
 
-const RevenueList: React.FC<RevenueData> = ({data}) => {
+const RevenueListOng: React.FC<RevenueData> = ({data}) => {
   const navigation = useNavigation<AppNavigationProps>();
 
   const handleRevenueExplorer = () => {
-    navigation.navigate('RevenueExplorer', {NameParamas: data.nameParams});
+    navigation.navigate('RevenueExplorerOng', {NameParamas: data.nameParams});
   };
 
   return (
@@ -42,4 +42,4 @@ const RevenueList: React.FC<RevenueData> = ({data}) => {
   );
 };
 
-export {RevenueList};
+export {RevenueListOng};

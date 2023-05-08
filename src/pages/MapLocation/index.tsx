@@ -255,7 +255,7 @@ const MapLocation: React.FC = () => {
           </IconContainer>
           <OngTitle>ONGs mais próximas</OngTitle>
           {OngList.map(item => (
-            <OngContainer>
+            <OngContainer activeOpacity={1}>
               <OngImg source={item.foto} />
               <OngInfo>
                 <OngTitleContent>{item.name}</OngTitleContent>

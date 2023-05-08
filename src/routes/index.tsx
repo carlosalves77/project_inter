@@ -23,6 +23,8 @@ import {OngHome} from '../pages/Home/OngHome';
 import {OngDonation} from '../pages/Donation/OngDonation';
 import {MapLocationOng} from '../pages/MapLocation/MapLocationOng';
 import {DonationCloses} from '../pages/DonationCloses';
+import {RevenueOng} from '../pages/Revenue/Revenue/RevenueOng';
+import {RevenueExplorerOng} from '../pages/Revenue/RevenueExplorer/RevenueExplorerOng';
 
 type AppRoutes = {
   // Donation Path
@@ -38,15 +40,17 @@ type AppRoutes = {
   Voluntary: undefined;
   RevenueList: undefined;
   ChosePath: undefined;
-  RevenueExplorer: undefined;
+  RevenueExplorer: undefined | {NameParamas: string};
   MapLocation: undefined | {showModal: boolean};
 
   // ONG Path
 
   OngHome: undefined | {feedBack: boolean};
   OngDonation: undefined;
+  RevenueOng: undefined;
   MapLocationOng: undefined | {showModal: boolean};
   DonationCloses: undefined | {Name: string};
+  RevenueExplorerOng: undefined | {NameParamas: string};
 };
 
 export type AppNavigationProps = NativeStackNavigationProp<AppRoutes>;
@@ -77,6 +81,8 @@ export function StackRoutes() {
       <stack.Screen name="MapLocationOng" component={MapLocationOng} />
       {/* @ts-ignore */}
       <stack.Screen name="DonationCloses" component={DonationCloses} />
+      <stack.Screen name="RevenueOng" component={RevenueOng} />
+      <stack.Screen name="RevenueExplorerOng" component={RevenueExplorerOng} />
     </stack.Navigator>
   );
 }

@@ -12,13 +12,13 @@ import {
   ShareButtonText,
 } from './styles';
 
-import {RevenueList} from '../../../components/RevenueList';
 import {BackButton} from '../../../components/Buttons/BackButton';
 
 import {useNavigation} from '@react-navigation/native';
 import {AppNavigationProps} from '../../../routes';
+import {RevenueListOng} from '../../../components/RevenueList/RevenueListOng';
 
-const Revenue: React.FC = () => {
+const RevenueOng: React.FC = () => {
   const data = [
     {
       id: '1',
@@ -44,7 +44,7 @@ const Revenue: React.FC = () => {
   const navigation = useNavigation<AppNavigationProps>();
 
   const handleBack = () => {
-    navigation.navigate('Home');
+    navigation.navigate('OngHome');
   };
 
   return (
@@ -70,7 +70,7 @@ const Revenue: React.FC = () => {
           nestedScrollEnabled
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}
-          renderItem={({item}) => <RevenueList data={item} />}
+          renderItem={({item}) => <RevenueListOng data={item} />}
         />
         <ShareButton onPress={() => navigation.navigate('RevenueList')}>
           <ShareButtonText>Compartilhe sua receita</ShareButtonText>
@@ -80,4 +80,4 @@ const Revenue: React.FC = () => {
   );
 };
 
-export {Revenue};
+export {RevenueOng};

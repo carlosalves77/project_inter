@@ -15,11 +15,17 @@ import {
   SubTitle,
   Title,
   Image,
+  ItensText,
+  ItensList,
+  Itens,
+  DeliveryOptionContent,
 } from './styles';
 
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {AppNavigationProps} from '../../routes';
 import {BackButton} from '../../components/Buttons/BackButton';
+import {useDispatch} from 'react-redux';
+import {openModal} from '../../redux/useDonationSucess';
 
 interface IOutStockListDto {
   id: string;
@@ -36,56 +42,19 @@ interface MyParams {
 
 const DonationCloses: React.FC<OutStockListProps> = () => {
   const [onOpen] = React.useState(true);
+  const dispatch = useDispatch();
 
   const route = useRoute();
 
   const myFeedBack = (route.params as MyParams)?.Name;
 
-  const [name, setName] = React.useState(myFeedBack);
+  const [name] = React.useState(myFeedBack);
 
   const navigation = useNavigation<AppNavigationProps>();
 
-  const foods = [
-    {
-      id: '1',
-      name: 'Macarrão',
-      peso: '500g',
-      foto: 'https://i.ibb.co/TmtRqkJ/Macarr-o.png',
-    },
-    {
-      id: '2',
-      name: 'Feijão',
-      peso: '1kg',
-      foto: 'https://i.ibb.co/hyL9NWQ/Feij-o.png',
-    },
-    {
-      id: '3',
-      name: 'Arroz',
-      peso: '1kg',
-      foto: 'https://i.ibb.co/9r1gq4z/Arroz.png',
-    },
-    {
-      id: '4',
-      name: 'Fubá',
-      peso: '500g',
-      foto: 'https://i.ibb.co/h7HnHJm/Floc-o.png',
-    },
-    {
-      id: '5',
-      name: 'Leite integral',
-      peso: '1L',
-      foto: 'https://i.ibb.co/R6pCLgY/Leite-Integral.png',
-    },
-    {
-      id: '6',
-      name: 'Açúcar',
-      peso: '1kg',
-      foto: 'https://i.ibb.co/GvPDNvF/A-ucar.png',
-    },
-  ];
-
   const handleDonate = () => {
-    navigation.navigate('OngHome', {feedBack: true});
+    navigation.navigate('OngHome');
+    dispatch(openModal());
   };
 
   const handleGoBack = () => {
@@ -111,7 +80,29 @@ const DonationCloses: React.FC<OutStockListProps> = () => {
           </Content>
           {onOpen ? (
             <OnOpenContainer>
-              <ContentList></ContentList>
+              <ContentList>
+                {/* {TODO} */}
+                <Itens>
+                  <ItensText>
+                    Endereço:{' '}
+                    <ItensList>
+                      Praça Severina{'\n'}Rita Coelho, 20 - Recife - PE
+                    </ItensList>
+                  </ItensText>
+                </Itens>
+                <Itens>
+                  <ItensText>Itens:</ItensText>
+                  <ItensList>• 1X Macarrão 500g,</ItensList>
+                  <ItensList>• 1X Feijão 1kg,</ItensList>
+                  <ItensList>• 2X Leite integral 1L,</ItensList>
+                  <ItensList>• 2X Creme Cracker 500g,</ItensList>
+                  <ItensList>• 1x Oléo 1L.</ItensList>
+                </Itens>
+                <DeliveryOptionContent>
+                  <ItensText>Opção de entrega:</ItensText>
+                  <ItensList>Retirada na residência.</ItensList>
+                </DeliveryOptionContent>
+              </ContentList>
             </OnOpenContainer>
           ) : null}
         </MainContent>
@@ -128,7 +119,28 @@ const DonationCloses: React.FC<OutStockListProps> = () => {
           </Content>
           {onOpen ? (
             <OnOpenContainer>
-              <ContentList></ContentList>
+              <ContentList>
+                <Itens>
+                  <ItensText>
+                    Endereço:{' '}
+                    <ItensList>
+                      Rua Frei Caneca,{'\n'}210 - Recife - PE
+                    </ItensList>
+                  </ItensText>
+                </Itens>
+                <Itens>
+                  <ItensText>Itens:</ItensText>
+                  <ItensList>• 1X Arroz 1kg,</ItensList>
+                  <ItensList>• 1X Feijão 1kg,</ItensList>
+                  <ItensList>• 2X Leite integral 1L,</ItensList>
+                  <ItensList>• 2X Pão de forma int.. 500g,</ItensList>
+                  <ItensList>• 1X Azeite 500ml.</ItensList>
+                </Itens>
+                <DeliveryOptionContent>
+                  <ItensText>Opção de entrega:</ItensText>
+                  <ItensList>Retirada na residência.</ItensList>
+                </DeliveryOptionContent>
+              </ContentList>
             </OnOpenContainer>
           ) : null}
         </MainContent>
@@ -145,27 +157,32 @@ const DonationCloses: React.FC<OutStockListProps> = () => {
           </Content>
           {onOpen ? (
             <OnOpenContainer>
-              <ContentList></ContentList>
+              <ContentList>
+                <Itens>
+                  <ItensText>
+                    Endereço:{' '}
+                    <ItensList>
+                      Rua Dom Bosco, 235 - Boa Vista, Recife - PE
+                    </ItensList>
+                  </ItensText>
+                </Itens>
+                <Itens>
+                  <ItensText>Itens:</ItensText>
+                  <ItensList>• 1X Arroz 1kg,</ItensList>
+                  <ItensList>• 1X Feijão 1kg,</ItensList>
+                  <ItensList>• 2X Leite integral 1L,</ItensList>
+                  <ItensList>• 2X Biscoito recheado 140g,</ItensList>
+                  <ItensList>• 1X Óleo de girassol 900ml.</ItensList>
+                </Itens>
+                <DeliveryOptionContent>
+                  <ItensText>Opção de entrega:</ItensText>
+                  <ItensList>Retirada na residência.</ItensList>
+                </DeliveryOptionContent>
+              </ContentList>
             </OnOpenContainer>
           ) : null}
         </MainContent>
       ) : null}
-      {/* <MainContent>
-        <Content disabled>
-          <ImageContent>
-            <Image source={{uri: 'https://i.ibb.co/TmtRqkJ/Macarr-o.png'}} />
-          </ImageContent>
-          <ContentTitle>
-            <Title>Gabriel Monteiro</Title>
-            <SubTitle>Macarrão 500g, Feijão 1kg...</SubTitle>
-          </ContentTitle>
-        </Content>
-        {onOpen ? (
-          <OnOpenContainer>
-            <ContentList></ContentList>
-          </OnOpenContainer>
-        ) : null}
-      </MainContent> */}
       <DonateButton onPress={() => handleDonate()}>
         <DonateText>Aceitar doação</DonateText>
       </DonateButton>

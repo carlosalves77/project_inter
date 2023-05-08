@@ -3,7 +3,7 @@ import {Dimensions} from 'react-native';
 
 import {THEME} from '../../theme';
 
-const {width, height} = Dimensions.get('screen');
+const {width, height} = Dimensions.get('window');
 
 export const Container = styled.View`
   height: ${height}px;

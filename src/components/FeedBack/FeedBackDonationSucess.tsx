@@ -13,13 +13,18 @@ import {
 import {THEME} from '../../theme';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+
+import {useDispatch} from 'react-redux';
+import {closeModal} from '../../redux/useDonationSucess';
 interface FeedBackModalProps {
   onClose: () => void;
 }
 
-const FeedBackOng: React.FC<FeedBackModalProps> = ({onClose}) => {
+const FeedBackDonationSucess: React.FC<FeedBackModalProps> = ({onClose}) => {
   const [rating, setRating] = useState(0);
   const [onConfirm, setOnConfirm] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleRate = (value: number) => {
     setRating(value);
@@ -43,14 +48,16 @@ const FeedBackOng: React.FC<FeedBackModalProps> = ({onClose}) => {
 
   const confirmRating = (onConfirm: () => void) => {
     setOnConfirm(true);
+    console.log('Avaliação confirmada', rating);
     onConfirm();
+    dispatch(closeModal());
   };
 
   return (
     <Container>
       <FeedBackCard>
         <FeedBackCardTitle>
-          Obrigado{'\n'}por realizar{'\n'}a avaliação
+          Doação{'\n'}recebida{'\n'}com sucesso
         </FeedBackCardTitle>
         <FeedBackCardText>Avalie sua experiência</FeedBackCardText>
         <FeedBackContentStars>
@@ -64,4 +71,4 @@ const FeedBackOng: React.FC<FeedBackModalProps> = ({onClose}) => {
   );
 };
 
-export {FeedBackOng};
+export {FeedBackDonationSucess};

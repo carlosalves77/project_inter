@@ -94,6 +94,27 @@ export const SubTitle = styled.Text`
 export const ContentList = styled.View`
   height: 60%;
   width: 90%;
+  padding: 10px;
+`;
+
+export const Itens = styled.View`
+  margin-bottom: 10px;
+`;
+
+export const DeliveryOptionContent = styled.View`
+  align-self: center;
+`;
+
+export const ItensText = styled.Text`
+  font-size: ${RFValue(20)}px;
+  font-family: ${THEME.fonts.extraBold};
+  color: ${THEME.colors.blackGray};
+`;
+
+export const ItensList = styled.Text`
+  font-size: ${RFValue(18)}px;
+  font-family: ${THEME.fonts.regular};
+  color: ${THEME.colors.blackGray};
 `;
 
 export const DonateButton = styled.TouchableOpacity`

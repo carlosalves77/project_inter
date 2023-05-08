@@ -31,14 +31,24 @@ import Revenue from '../../../assets/Revenue.png';
 
 import {MapLocationOng} from '../MapLocation/MapLocationOng';
 import {FeedBackOng} from '../../components/FeedBack/FeedBackOng';
+import {FeedBackDonationSucess} from '../../components/FeedBack/FeedBackDonationSucess';
+
+import {useDispatch, useSelector} from 'react-redux';
+import {closeModal} from '../../redux/useDonationSucess';
 
 interface MyParams {
   feedBack: boolean;
 }
 
 const OngHome: React.FC = () => {
+  const dispatch = useDispatch();
+
   const navigation = useNavigation<AppNavigationProps>();
   const route = useRoute();
+
+  const {isModalOpen} = useSelector((state: any) => state.modal);
+
+  console.log(isModalOpen);
 
   const myFeedBack = (route.params as MyParams)?.feedBack;
 
@@ -51,11 +61,12 @@ const OngHome: React.FC = () => {
   };
 
   const handleRevenue = () => {
-    navigation.navigate('Revenue');
+    navigation.navigate('RevenueOng');
   };
 
   const handleCloseFeedBack = () => {
-    navigation.navigate('OngHome', {feedBack: false});
+    navigation.navigate('OngHome');
+    return dispatch(closeModal());
   };
 
   const handleMaps = () => {
@@ -99,6 +110,9 @@ const OngHome: React.FC = () => {
       </BottomViewStyle>
       {myFeedBack ? (
         <FeedBackOng onClose={() => handleCloseFeedBack()} />
+      ) : null}
+      {isModalOpen ? (
+        <FeedBackDonationSucess onClose={() => handleCloseFeedBack()} />
       ) : null}
     </Container>
   );

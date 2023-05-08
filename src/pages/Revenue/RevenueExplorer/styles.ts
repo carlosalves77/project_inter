@@ -15,6 +15,7 @@ export const Container = styled.View`
 
 export const RevenueListContent = styled.View`
   width: 193px;
+  height: 60px;
   padding: 5px 2px 5px 2px;
   background-color: ${THEME.colors.red};
   border-radius: 47px;
@@ -69,6 +70,7 @@ export const IngredientsList = styled.Text`
   font-family: ${THEME.fonts.bold};
   font-size: ${RFValue(18)}px;
   color: ${THEME.colors.white};
+  margin-bottom: 20px;
 `;
 
 export const PreparationMethodList = styled.Text`
@@ -78,6 +80,7 @@ export const PreparationMethodList = styled.Text`
   font-family: ${THEME.fonts.bold};
   font-size: ${RFValue(14)}px;
   color: ${THEME.colors.white};
+  margin-bottom: 20px;
 `;
 
 export const AvalibleContent = styled.TouchableOpacity`

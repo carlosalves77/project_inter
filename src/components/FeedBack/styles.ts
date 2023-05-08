@@ -29,8 +29,7 @@ export const FeedBackCard = styled.View`
 
 export const FeedBackCardTitle = styled.Text`
   font-family: ${THEME.fonts.extraBold};
-  font-weight: 900;
-  font-size: ${RFValue(36)}px;
+  font-size: ${RFValue(32)}px;
   color: ${THEME.colors.white};
   margin-top: 42px;
 `;
