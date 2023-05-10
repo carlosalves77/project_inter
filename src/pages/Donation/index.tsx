@@ -42,6 +42,7 @@ import {AppNavigationProps} from '../../routes';
 import {useDispatch, useSelector} from 'react-redux';
 
 import {reset} from '../../redux/useSlice';
+import {ItemToItemRecomedation} from '../../components/FeedBack/ItemToItemRecomedation';
 
 interface CustomButtonProps extends TouchableOpacityProps {
   backgroundColor?: string;
@@ -52,9 +53,10 @@ interface Person {
   name: string;
 }
 
-interface State {
-  listValue: {value: Person[]};
-}
+type Produto = {
+  name: string;
+  foto: string;
+};
 
 const Donation: React.FC<CustomButtonProps> = ({
   backgroundColor,
@@ -103,12 +105,14 @@ const Donation: React.FC<CustomButtonProps> = ({
   const [donations] = React.useState(foods);
 
   const [endDonation, setEndDonation] = React.useState(true);
+  const [secondButton, setSecondButton] = React.useState(true);
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
 
   const [button1Active, setButton1Active] = React.useState(false);
   const [button2Active, setButton2Active] = React.useState(true);
 
   const [choseOng, setChoseOng] = React.useState(true);
+  const [showMessage, setShowMessage] = React.useState(false);
 
   const dispatch = useDispatch();
 
@@ -118,6 +122,56 @@ const Donation: React.FC<CustomButtonProps> = ({
 
   const uniqueNames: {[name: string]: boolean} = {};
   const uniquePeople: Person[] = [];
+
+  const random: Produto[] = [
+    {
+      name: 'Macarrão',
+      foto: 'https://i.ibb.co/TmtRqkJ/Macarr-o.png',
+    },
+    {
+      name: 'Feijão',
+      foto: 'https://i.ibb.co/hyL9NWQ/Feij-o.png',
+    },
+    {
+      name: 'Arroz',
+      foto: 'https://i.ibb.co/9r1gq4z/Arroz.png',
+    },
+    {
+      name: 'Fubá',
+      foto: 'https://i.ibb.co/h7HnHJm/Floc-o.png',
+    },
+    {
+      name: 'Leite Integral',
+      foto: 'https://i.ibb.co/R6pCLgY/Leite-Integral.png',
+    },
+    {
+      name: 'Açucar',
+      foto: 'https://i.ibb.co/GvPDNvF/A-ucar.png',
+    },
+  ];
+
+  const produtoAleatorio = random[Math.floor(Math.random() * random.length)];
+
+  function getFotoProduto(name: string): string {
+    switch (produtoAleatorio.name) {
+      case 'Macarrão':
+        return 'https://i.ibb.co/TmtRqkJ/Macarr-o.png';
+      case 'Feijão':
+        return 'https://i.ibb.co/hyL9NWQ/Feij-o.png';
+      case 'Arroz':
+        return 'https://i.ibb.co/9r1gq4z/Arroz.png';
+      case 'Fubá':
+        return 'https://i.ibb.co/h7HnHJm/Floc-o.png';
+      case 'Leite Integral':
+        return 'https://i.ibb.co/R6pCLgY/Leite-Integral.png';
+      case 'Açucar':
+        return 'https://i.ibb.co/GvPDNvF/A-ucar.png';
+      default:
+        return '';
+    }
+  }
+
+  const fotoProduto = getFotoProduto(produtoAleatorio.name);
 
   //@ts-ignore
   value.forEach(person => {
@@ -185,7 +239,27 @@ const Donation: React.FC<CustomButtonProps> = ({
       setTimeout(() => {
         setButtonDisabled(false);
       }, 2000);
+      Toast.show({
+        type: 'error',
+        text1: 'Adicione algum item!',
+      });
+    }
 
+    if (endDonation && value.length !== 0) {
+      setShowMessage(true);
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 3000);
+      setSecondButton(!secondButton);
+    }
+  };
+
+  const handleButtonConfirmNextStep = () => {
+    if (value.length === 0) {
+      setButtonDisabled(true);
+      setTimeout(() => {
+        setButtonDisabled(false);
+      }, 2000);
       Toast.show({
         type: 'error',
         text1: 'Adicione algum item!',
@@ -215,12 +289,21 @@ const Donation: React.FC<CustomButtonProps> = ({
             showsVerticalScrollIndicator={false}
           />
           <ButtonContent>
-            <Button
-              name="Continuar"
-              isLoading={false}
-              onPress={() => handleButtonConfirm()}
-              disabled={buttonDisabled}
-            />
+            {secondButton ? (
+              <Button
+                name="Continuar"
+                isLoading={false}
+                onPress={() => handleButtonConfirm()}
+                disabled={buttonDisabled}
+              />
+            ) : (
+              <Button
+                name="Continuar"
+                isLoading={false}
+                onPress={() => handleButtonConfirmNextStep()}
+                disabled={buttonDisabled}
+              />
+            )}
           </ButtonContent>
         </Content>
       ) : (
@@ -285,7 +368,14 @@ const Donation: React.FC<CustomButtonProps> = ({
           </ScrollView>
         </Content>
       )}
+
       <Toast position="top" />
+      {showMessage ? (
+        <ItemToItemRecomedation
+          name={produtoAleatorio.name}
+          foto={fotoProduto}
+        />
+      ) : null}
     </Container>
   );
 };

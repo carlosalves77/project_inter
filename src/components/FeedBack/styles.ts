@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import {Platform} from 'react-native';
 
 import {THEME} from '../../theme';
 
@@ -32,6 +31,28 @@ export const FeedBackCardTitle = styled.Text`
   font-size: ${RFValue(32)}px;
   color: ${THEME.colors.white};
   margin-top: 42px;
+`;
+
+export const Title = styled.Text`
+  font-family: ${THEME.fonts.extraBold};
+  font-size: ${RFValue(22)}px;
+  color: ${THEME.colors.white};
+  margin-top: 42px;
+  text-align: center;
+`;
+
+export const ProductImage = styled.Image`
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  margin-top: 15px;
+`;
+
+export const NameProduct = styled.Text`
+  font-family: ${THEME.fonts.extraBold};
+  font-size: ${RFValue(22)}px;
+  color: ${THEME.colors.white};
+  text-align: center;
 `;
 
 export const FeedBackCardText = styled.Text`
