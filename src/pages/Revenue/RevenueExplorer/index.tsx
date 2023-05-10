@@ -69,7 +69,9 @@ const RevenueExplorer: React.FC = () => {
         <BackButton onPress={() => handleBackButton()} />
         <RevenueListContent>
           {name === 'gabriel' ? (
-            <RevenueListText>Macarrão de panela de pressão</RevenueListText>
+            <RevenueListText>
+              Macarrão em panela de{'\n'}pressão
+            </RevenueListText>
           ) : name === 'clerisson' ? (
             <RevenueListText>Feijão tropeiro</RevenueListText>
           ) : name === 'aline' ? (

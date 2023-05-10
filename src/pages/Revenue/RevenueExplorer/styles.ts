@@ -14,9 +14,8 @@ export const Container = styled.View`
 `;
 
 export const RevenueListContent = styled.View`
-  width: 193px;
-  height: 60px;
-  padding: 5px 2px 5px 2px;
+  height: 55px;
+  padding: 10px;
   background-color: ${THEME.colors.red};
   border-radius: 47px;
   align-items: center;
@@ -29,6 +28,7 @@ export const RevenueListText = styled.Text`
   font-size: ${RFValue(16)}px;
   color: ${THEME.colors.white};
   text-align: center;
+  line-height: 20px;
 `;
 
 export const IngredientsBox = styled.View`

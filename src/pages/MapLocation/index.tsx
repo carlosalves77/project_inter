@@ -95,7 +95,7 @@ const MapLocation: React.FC = () => {
       distance: '1,5 km',
     },
     {
-      name: 'Amigo da vez',
+      name: 'Semear',
       foto: AmigodaVez,
       subnome: 'Organização pela vida e saúde',
       distance: '2,5 km',

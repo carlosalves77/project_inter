@@ -29,6 +29,7 @@ import {
   ButtonOngTitle,
 } from './styles';
 import {THEME} from '../../theme';
+import Toast from 'react-native-toast-message';
 
 import {BackButton} from '../../components/Buttons/BackButton';
 import {Button} from '../../components/Buttons/Button';
@@ -38,9 +39,9 @@ import {FoodList} from '../../components/FoodList';
 import {useNavigation} from '@react-navigation/native';
 import {AppNavigationProps} from '../../routes';
 
-import api from '../../services/api/api';
-import {useSelector} from 'react-redux';
-import Toast from 'react-native-toast-message';
+import {useDispatch, useSelector} from 'react-redux';
+
+import {reset} from '../../redux/useSlice';
 
 interface CustomButtonProps extends TouchableOpacityProps {
   backgroundColor?: string;
@@ -109,6 +110,8 @@ const Donation: React.FC<CustomButtonProps> = ({
 
   const [choseOng, setChoseOng] = React.useState(true);
 
+  const dispatch = useDispatch();
+
   const navigation = useNavigation<AppNavigationProps>();
 
   const {value} = useSelector((state: any) => state.listValue);
@@ -154,6 +157,7 @@ const Donation: React.FC<CustomButtonProps> = ({
 
   const handleFeedBack = () => {
     navigation.navigate('Home', {feedBack: true});
+    dispatch(reset());
   };
 
   const renderItem = ({item, index}: {item: any; index: number}) => {

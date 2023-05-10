@@ -28,5 +28,4 @@ export const OutStockListText = styled.Text`
   font-family: ${THEME.fonts.bold};
   font-size: ${RFValue(18)}px;
   color: ${THEME.colors.white};
-  font-weight: 800;
 `;

@@ -46,6 +46,7 @@ export const DonationListText = styled.Text`
   font-size: ${RFValue(18)}px;
   color: ${THEME.colors.white};
   text-align: center;
+  line-height: 20px;
 `;
 
 export const DonationList = styled.View`
@@ -77,7 +78,6 @@ export const DonationTotalCardTitle = styled.Text`
   font-family: ${THEME.fonts.bold};
   font-size: ${RFValue(24)}px;
   color: ${THEME.colors.white};
-  font-weight: 800;
 `;
 
 export const DonationTotalCardText = styled.Text`
@@ -137,6 +137,7 @@ export const ButtonOngTitle = styled.Text`
   font-size: ${RFValue(12)}px;
   color: ${THEME.colors.white};
   text-align: center;
+  line-height: 16px;
 `;
 
 export const DonationTotalChosenCardContent = styled.View`

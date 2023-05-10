@@ -26,8 +26,10 @@ import {FoodList} from '../../components/FoodList';
 import {useNavigation} from '@react-navigation/native';
 import {AppNavigationProps} from '../../routes';
 
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+
 import Toast from 'react-native-toast-message';
+import {reset} from '../../redux/useSlice';
 
 interface Person {
   name: string;
@@ -91,6 +93,8 @@ const OngDonation: React.FC<CustomButtonProps> = ({
   const [endDonation, setEndDonation] = React.useState(true);
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
 
+  const dispatch = useDispatch();
+
   const navigation = useNavigation<AppNavigationProps>();
 
   const {value} = useSelector((state: any) => state.listValue);
@@ -124,6 +128,7 @@ const OngDonation: React.FC<CustomButtonProps> = ({
 
   const handleFeedBack = () => {
     navigation.navigate('OngHome');
+    dispatch(reset());
   };
 
   const renderItem = ({item, index}: {item: any; index: number}) => {

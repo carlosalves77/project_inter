@@ -32,12 +32,12 @@ export const OutStockListText = styled.Text`
 `;
 
 export const RevenueText = styled.Text`
-  font-family: ${THEME.fonts.bold};
-  font-style: normal;
-  font-size: ${RFValue(20)}px;
+  font-family: ${THEME.fonts.extraBold};
+  font-size: ${RFValue(18)}px;
   color: ${THEME.colors.lightGray};
   text-align: center;
   margin-bottom: 28px;
+  line-height: 25px;
 `;
 
 export const ShareButton = styled.TouchableOpacity`
@@ -53,9 +53,8 @@ export const ShareButton = styled.TouchableOpacity`
 
 export const ShareButtonText = styled.Text`
   font-family: ${THEME.fonts.extraBold};
-
-  font-style: normal;
   font-size: ${RFValue(20)}px;
   color: ${THEME.colors.red};
   text-align: center;
+  line-height: 25px;
 `;

@@ -50,14 +50,12 @@ export const FoodListInfoContent = styled.View`
 export const FoodName = styled.Text`
   font-family: ${THEME.fonts.extraBold};
   font-size: ${RFValue(16)}px;
-  font-weight: 800;
   color: ${THEME.colors.black};
 `;
 
 export const FoodDescription = styled.Text`
   font-family: ${THEME.fonts.regular};
   font-size: ${RFValue(18)}px;
-  font-weight: 400;
   color: ${THEME.colors.black};
   margin-right: 10px;
   margin-left: 2px;
@@ -75,6 +73,5 @@ export const FoodQuantityValue = styled.View`
 export const FoodQuantityValueText = styled.Text`
   font-family: ${THEME.fonts.extraBold};
   font-size: ${RFValue(18)}px;
-  font-weight: 800;
   color: ${THEME.colors.white};
 `;

@@ -26,7 +26,7 @@ const OutStock: React.FC = () => {
   const data: IdataProps[] = [
     {id: '1', name: 'Família Solidária', foto: outStockOng},
     {id: '2', name: 'Nova esperança', foto: NovaEsperanca},
-    {id: '3', name: 'Amigo da vez', foto: AmigodaVez},
+    {id: '3', name: 'Semear', foto: AmigodaVez},
   ];
 
   const handleBack = () => {

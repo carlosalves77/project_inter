@@ -36,7 +36,7 @@ export const FeedBackCardTitle = styled.Text`
 
 export const FeedBackCardText = styled.Text`
   font-family: ${THEME.fonts.medium};
-  font-weight: 500;
+
   font-size: ${RFValue(16)}px;
   color: ${THEME.colors.white};
   text-align: center;

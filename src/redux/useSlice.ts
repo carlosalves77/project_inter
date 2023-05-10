@@ -24,10 +24,13 @@ const slice = createSlice({
         state.value.splice(index, 1);
       }
     },
+    reset: state => {
+      state.value = [];
+    },
   },
 });
 
-export const {increment, decrement} = slice.actions;
+export const {increment, decrement, reset} = slice.actions;
 
 export const selectValue = (state: {counter: State}) => state.counter.value;
 

@@ -211,6 +211,7 @@ const MapLocationOng: React.FC = () => {
         region={region}
         zoomEnabled={true}
         showsUserLocation={true}
+        showsMyLocationButton={true}
         loadingEnabled={true}>
         <Marker
           coordinate={{

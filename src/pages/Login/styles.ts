@@ -148,7 +148,7 @@ export const TextInfo = styled.Text`
 
 export const TextInfoDescription = styled.Text`
   font-family: ${THEME.fonts.regular};
-  font-style: normal;
   font-size: ${RFValue(24)}px;
   color: ${THEME.colors.white};
+  line-height: 30px;
 `;

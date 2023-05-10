@@ -76,7 +76,7 @@ const RevenueList: React.FC = () => {
           textAlignVertical="top"
         />
         <ButtonContent>
-          <Button name="Enviar" />
+          <Button name="Enviar" onPress={() => navigation.goBack()} />
         </ButtonContent>
       </ScrollView>
     </Container>

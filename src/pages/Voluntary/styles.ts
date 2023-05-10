@@ -37,6 +37,7 @@ export const VoluntaryText = styled.Text`
   color: ${THEME.colors.lightGray};
   text-align: center;
   margin-bottom: 28px;
+  line-height: 25px;
 `;
 
 export const TextInput = styled(Input)`
@@ -67,6 +68,7 @@ export const TimeInformationText = styled.Text`
   font-family: ${THEME.fonts.extraBold};
   font-size: ${RFValue(18)}px;
   color: ${THEME.colors.black};
+  line-height: 22px;
 `;
 
 export const TimeButton = styled.TouchableOpacity`
